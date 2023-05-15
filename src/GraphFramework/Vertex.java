@@ -14,7 +14,7 @@ public class Vertex {
     String label;
     boolean isVisited;
 
-    // method is responsible for displaying the information of the class attributes.
+    // Method is responsible for displaying the information of the class attributes.
     public static void displyInfo() {
 
     }

@@ -13,7 +13,7 @@ public class Edge {
     // Data filed
     int weight;
 
-    // method is responsible for displaying the information of the class attributes.
+    // Method is responsible for displaying the information of the class attributes.
     public static void displyInfo() {
 
     }
