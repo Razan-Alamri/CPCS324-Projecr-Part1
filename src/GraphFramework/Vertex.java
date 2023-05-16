@@ -37,9 +37,4 @@ public class Vertex {
     public void displyInfo() {
         System.err.println("Vertex " + label + " is Visited " + isVisited + ", adjacency list of vertex is " + adjList);
     }
-
-    @Override
-    public String toString() {
-        return "Vertex " + label + " is Visited " + isVisited + ", adjacency list of vertex is " + adjList;
-    }
 }
