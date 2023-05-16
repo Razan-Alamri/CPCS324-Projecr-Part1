@@ -41,10 +41,4 @@ public class Edge {
         System.out.println("Parent vertex: " + parent.label + "\nSource vertex: " + source.label + "\nTarget vertex: "
                 + target.label + " \nEdge weight: " + weight);
     }
-
-    @Override
-    public String toString() {
-        return "Parent vertex: " + parent.label + "\nSource vertex: " + source.label + "\nTarget vertex: "
-                + target.label + " \nEdge weight: " + weight;
-    }
 }
