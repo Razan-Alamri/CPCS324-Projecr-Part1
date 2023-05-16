@@ -22,7 +22,7 @@ public class Vertex {
     // Store adjacency list in LL (from association relationship)
     LinkedList<Edge> adjList;
 
-    // Contructors ------------ Check
+    // Contructors
 
     public Vertex() {
     }
@@ -33,7 +33,6 @@ public class Vertex {
     }
 
     // Method is responsible for displaying the information of the class attributes.
-    // ------------- check
     public void displyInfo() {
         System.err.println("Vertex " + label + " is Visited " + isVisited + ", adjacency list of vertex is " + adjList);
     }

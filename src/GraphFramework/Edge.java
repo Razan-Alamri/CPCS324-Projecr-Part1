@@ -15,28 +15,26 @@ public class Edge {
 
     // Cost of edge
     int weight;
-    // (from association relationship)
+    // Parent vertex (from association relationship)
     Vertex parent;
     // Source vertex (from association relationship)
     Vertex source;
     // Target vertex (from association relationship)
     Vertex target;
 
-    // Contructors ------------ Check
+    // Contructors
 
     public Edge() {
     }
 
-    public Edge(int weight, Vertex parent, Vertex source, Vertex target) {
+    public Edge(Vertex source, Vertex target, int weight) {
         this.weight = weight;
         this.source = source;
         this.target = target;
-        //
-        this.parent = new Vertex();
+        this.parent = source;
     }
 
     // Method is responsible for displaying the information of the class attributes.
-    // ------------- check
     public void displyInfo() {
         System.out.println("Parent vertex: " + parent.label + "\nSource vertex: " + source.label + "\nTarget vertex: "
                 + target.label + " \nEdge weight: " + weight);
