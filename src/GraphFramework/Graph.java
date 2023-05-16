@@ -8,6 +8,9 @@
  */
 package GraphFramework;
 
+import java.io.File;
+
+// Graph is a class defines the structure of a graph
 public class Graph {
 
     // Data filed
@@ -16,10 +19,17 @@ public class Graph {
     int verticesNo;
     // Number of edges
     int edgeNo;
-    // Check if graph is directed or no
+    // Check if graph is directed or not
     boolean isDigraph;
+    // Array to store vertices (from association relationship)
+    Vertex vertices[];
 
-    // Contructor
+    // Contructors ------------ Check
+
+    public Graph() {
+
+    }
+
     public Graph(int verticesNo, int edgeNo, boolean isDigraph) {
         this.verticesNo = verticesNo;
         this.edgeNo = edgeNo;
@@ -42,7 +52,7 @@ public class Graph {
     }
 
     //
-    public static void readGraphFromFile() {
+    public static void readGraphFromFile(File inputFile) {
 
     }
 
