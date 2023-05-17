@@ -18,7 +18,7 @@ public class Vertex {
     // Represents the vertex label
     String label;
     // Check if vertex is visited or not
-    boolean isVisited;
+    boolean isVisited = false;
     // Store adjacency list in LL (from association relationship)
     LinkedList<Edge> adjList;
 
