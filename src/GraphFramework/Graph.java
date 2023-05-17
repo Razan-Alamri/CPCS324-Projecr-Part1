@@ -8,7 +8,8 @@
  */
 package GraphFramework;
 
-import java.io.File;
+import java.io.*;
+import java.util.*;;
 
 // Graph is a class defines the structure of a graph
 public abstract class Graph {
@@ -21,8 +22,10 @@ public abstract class Graph {
     int edgeNo;
     // Check if graph is directed or not
     boolean isDigraph;
-    // Array to store vertices (from association relationship)
-    Vertex vertices[];
+    // Array list to store vertices (from association relationship)
+    List<Vertex> vertices;
+    // Map to can found vertex by label
+    Map<String, Vertex> vLeabelMap;
 
     // Contructors
 
@@ -34,7 +37,8 @@ public abstract class Graph {
         this.verticesNo = verticesNo;
         this.edgeNo = edgeNo;
         this.isDigraph = isDigraph;
-        vertices = new Vertex[verticesNo];
+        this.vertices = new ArrayList<>(verticesNo);
+        this.vLeabelMap = new HashMap<>(verticesNo);
 
         /*
          * for (int i = 0; i < verticesNo; i++) {
@@ -57,8 +61,38 @@ public abstract class Graph {
     }
 
     //
-    public void readGraphFromFile(File inputFile) {
+    public Graph readGraphFromFile(String inputFile) throws FileNotFoundException {
 
+        // Read graph from file
+        Scanner inpScanner = new Scanner(new File(inputFile));
+        // Rerad number of vertecies and edges
+        this.verticesNo = inpScanner.nextInt();
+        this.edgeNo = inpScanner.nextInt();
+
+        // Create vertices
+        for (int i = 0; i < verticesNo; i++) {
+            // Read lable of vertex
+            String lable = inpScanner.next();
+            Vertex ver = creatVertex(lable);
+            ver.setVisited(false);
+            vertices.add(ver);
+            vLeabelMap.put(lable, ver);
+        }
+        // Create edges
+        for (int i = 0; i < edgeNo; i++) {
+            // Read v , u and w
+            String vLable = inpScanner.next();
+            String uLable = inpScanner.next();
+            int w = inpScanner.nextInt();
+            Vertex v = vLeabelMap.get(vLable);
+            Vertex u = vLeabelMap.get(uLable);
+            // Call method addEdge to add edges
+            addEdge(v, u, w);
+        }
+        // Close scanner
+        inpScanner.close();
+        // Retern graph
+        return this;
     }
 
     /*

@@ -11,7 +11,7 @@ package GraphFramework;
 import java.util.*;
 
 // Vertex is a class that represents a graph vertex
-public class Vertex {
+public abstract class Vertex {
 
     // Data filed
 
@@ -33,7 +33,30 @@ public class Vertex {
     }
 
     // Method is responsible for displaying the information of the class attributes.
-    public void displyInfo() {
-        System.err.println("Vertex " + label + " is Visited " + isVisited + ", adjacency list of vertex is " + adjList);
+    public abstract void displyInfo();
+
+    // Setteers and Getters
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public boolean isVisited() {
+        return isVisited;
+    }
+
+    public void setVisited(boolean isVisited) {
+        this.isVisited = isVisited;
+    }
+
+    public LinkedList<Edge> getAdjList() {
+        return adjList;
+    }
+
+    public void setAdjList(LinkedList<Edge> adjList) {
+        this.adjList = adjList;
     }
 }
