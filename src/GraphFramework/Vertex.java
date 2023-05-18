@@ -23,7 +23,6 @@ public abstract class Vertex {
     LinkedList<Edge> adjList;
 
     // Contructors
-
     public Vertex() {
     }
 

@@ -23,7 +23,6 @@ public abstract class Edge {
     Vertex target;
 
     // Contructors
-
     public Edge() {
     }
 

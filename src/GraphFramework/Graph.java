@@ -26,11 +26,11 @@ public abstract class Graph {
     List<Vertex> vertices;
     // Map to can found vertex by label
     Map<String, Vertex> vLeabelMap;
+    // Map to can found Edge by source
+    Map<String, Edge> edgeMap;
 
     // Contructors
-
     public Graph() {
-
     }
 
     public Graph(int verticesNo, int edgeNo, boolean isDigraph) {
@@ -39,28 +39,107 @@ public abstract class Graph {
         this.isDigraph = isDigraph;
         this.vertices = new ArrayList<>(verticesNo);
         this.vLeabelMap = new HashMap<>(verticesNo);
-
-        /*
-         * for (int i = 0; i < verticesNo; i++) {
-         * vertices[i] = new Vertex(lable);
-         * }
-         */
     }
 
     // Abstract method to create object of Vertex
-    // ----------------------------------------------- check
     public abstract Vertex creatVertex(String lable);
 
     // Abstract method to create object of Edge
-    // ----------------------------------------------- check
     public abstract Edge creatEdge(Vertex v, Vertex u, int w);
 
-    //
-    public void makeGraph() {
+    /*
+     * Methos responsible for creating a graph object with the specified parameters
+     * and randomly initializes the vertices’ labels,
+     * creating edges that connects the created vertices randomly and
+     * assigning them random weights.
+     */
+    public Graph makeGraph(int verticesNo, int edgeNo) {
 
+        // Create a new graph with this patameters
+        this.verticesNo = verticesNo;
+        this.edgeNo = edgeNo;
+        this.vertices = new ArrayList<>(verticesNo);
+        this.vLeabelMap = new HashMap<>(verticesNo);
+        this.edgeMap = new HashMap<>(edgeNo);
+
+        // Create vertices
+        for (int i = 0; i < verticesNo; i++) {
+            // Lable of vertex (name of labeal will be VertexN where N is number )
+            String lable = "Vertex" + (i + 1);
+            Vertex ver = creatVertex(lable);
+            ver.setVisited(false);
+            vertices.add(ver);
+            vLeabelMap.put(lable, ver);
+        }
+        // Create edges
+        // To get random vertex and wight
+        Random r = new Random();
+        for (int i = 0; i < edgeNo; i++) {
+            // Read v , u and w
+            int vLable_index = r.nextInt(verticesNo);
+            int uLable_index = r.nextInt(verticesNo);
+            // To avoid duplicate vertex ( 1- visited vertex 2- not visited and not equal
+            // visited )
+            while (vLable_index == uLable_index) {
+                uLable_index = r.nextInt(verticesNo);
+            }
+            // Random wight in range 0-100
+            int w = r.nextInt(100) + 1;
+            Vertex v = vLeabelMap.get(vLable_index);
+            Vertex u = vLeabelMap.get(uLable_index);
+            // Call method addEdge to add edges
+            addEdge(v, u, w);
+        }
+        // Check graph is connected or no
+        if (!Graph_isCnnected()) {
+            makeGraph(verticesNo, edgeNo);
+        }
+        // Return graph
+        return this;
     }
 
-    //
+    // ------------------------------------------------Chech connected method
+
+    /*
+     * Metod to Make sure that the resulting graph is connected
+     * using depth first search
+     */
+    private boolean Graph_isCnnected() {
+        if (vertices.isEmpty()) {
+            return true;
+        }
+        Vertex sourceVer = vertices.get(0);
+        int countVisited = 0;
+        // Call DFS to search for a source vertex
+        DFS(sourceVer);
+        // To count visited vertices and compair with vertices number
+        for (Vertex ver : vertices) {
+            if (ver.isVisited) {
+                countVisited++;
+            }
+        }
+        for (Vertex ver : vertices) {
+            ver.setVisited(false);
+        }
+        // eqaul (true) then graph is connected
+        return countVisited == verticesNo;
+    }
+
+    // Depth first search to search for a source vertex
+    public void DFS(Vertex v) {
+        v.setVisited(true);
+        for (Edge e : v.getAdjList()) {
+            Vertex u = e.getTarget();
+            if (!u.isVisited()) {
+                DFS(u);
+            }
+        }
+    }
+
+    /*
+     * Method to reads the edges and vertices from the text file
+     * whose name is inputFile
+     */
     public Graph readGraphFromFile(String inputFile) throws FileNotFoundException {
 
         // Read graph from file
@@ -91,7 +170,7 @@ public abstract class Graph {
         }
         // Close scanner
         inpScanner.close();
-        // Retern graph
+        // Return graph
         return this;
     }
 
