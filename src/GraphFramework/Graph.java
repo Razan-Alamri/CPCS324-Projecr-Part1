@@ -22,12 +22,12 @@ public abstract class Graph {
     int edgeNo;
     // Check if graph is directed or not
     boolean isDigraph;
-    // Array list to store vertices (from association relationship)
-    List<Vertex> vertices;
-    // Map to can found vertex by label
-    Map<String, Vertex> vLeabelMap;
+    // Map to can store and found vertex by label (from association relationship)
+    Map<String, Vertex> vertices;
+
+    // ----------------------------------------------------------check
     // Map to can found Edge by source
-    Map<String, Edge> edgeMap;
+    // Map<String, Edge> edgeMap;
 
     // Contructors
     public Graph() {
@@ -37,8 +37,7 @@ public abstract class Graph {
         this.verticesNo = verticesNo;
         this.edgeNo = edgeNo;
         this.isDigraph = isDigraph;
-        this.vertices = new ArrayList<>(verticesNo);
-        this.vLeabelMap = new HashMap<>(verticesNo);
+        this.vertices = new HashMap<>(verticesNo);
     }
 
     // Abstract method to create object of Vertex
@@ -53,23 +52,15 @@ public abstract class Graph {
      * creating edges that connects the created vertices randomly and
      * assigning them random weights.
      */
-    public Graph makeGraph(int verticesNo, int edgeNo) {
-
-        // Create a new graph with this patameters
-        this.verticesNo = verticesNo;
-        this.edgeNo = edgeNo;
-        this.vertices = new ArrayList<>(verticesNo);
-        this.vLeabelMap = new HashMap<>(verticesNo);
-        this.edgeMap = new HashMap<>(edgeNo);
+    public Graph makeGraph() {
 
         // Create vertices
         for (int i = 0; i < verticesNo; i++) {
             // Lable of vertex (name of labeal will be VertexN where N is number )
-            String lable = "Vertex" + (i + 1);
+            String lable = "O" + (i + 1);
             Vertex ver = creatVertex(lable);
             ver.setVisited(false);
-            vertices.add(ver);
-            vLeabelMap.put(lable, ver);
+            vertices.put(lable, ver);
         }
         // Create edges
         // To get random vertex and wight
@@ -85,65 +76,41 @@ public abstract class Graph {
             }
             // Random wight in range 0-100
             int w = r.nextInt(100) + 1;
-            Vertex v = vLeabelMap.get(vLable_index);
-            Vertex u = vLeabelMap.get(uLable_index);
+            Vertex v = vertices.get(vLable_index);
+            Vertex u = vertices.get(uLable_index);
             // Call method addEdge to add edges
             addEdge(v, u, w);
         }
-        // Check graph is connected or no
-        if (!Graph_isCnnected()) {
-            makeGraph(verticesNo, edgeNo);
-        }
+        // Create edges
+        // ------------------------------------------------------------check
+        // To get random vertex and wight
+        /*
+         * int edgeCount = 0;
+         * while (edgeCount < edgeNo) {
+         * Vertex v = vertices.get(r.nextInt(verticesNo));
+         * Vertex u = vertices.get(r.nextInt(verticesNo));
+         * if (v != u && !v.adjList.contains(u)) {
+         * // Random wight in range 1-50
+         * int w = r.nextInt(50) + 1;
+         * // Call method addEdge to add edges
+         * addEdge(v, u, w);
+         * edgeCount++;
+         * }
+         * }
+         */
         // Return graph
         return this;
-    }
 
-    // ------------------------------------------------Chech connected method
-
-    /*
-     * Metod to Make sure that the resulting graph is connected
-     * using depth first search
-     */
-    private boolean Graph_isCnnected() {
-        if (vertices.isEmpty()) {
-            return true;
-        }
-        Vertex sourceVer = vertices.get(0);
-        int countVisited = 0;
-        // Call DFS to search for a source vertex
-        DFS(sourceVer);
-        // To count visited vertices and compair with vertices number
-        for (Vertex ver : vertices) {
-            if (ver.isVisited) {
-                countVisited++;
-            }
-        }
-        for (Vertex ver : vertices) {
-            ver.setVisited(false);
-        }
-        // eqaul (true) then graph is connected
-        return countVisited == verticesNo;
-    }
-
-    // Depth first search to search for a source vertex
-    public void DFS(Vertex v) {
-        v.setVisited(true);
-        for (Edge e : v.getAdjList()) {
-            Vertex u = e.getTarget();
-            if (!u.isVisited()) {
-                DFS(u);
-            }
-        }
     }
 
     /*
      * Method to reads the edges and vertices from the text file
      * whose name is inputFile
      */
-    public Graph readGraphFromFile(String inputFile) throws FileNotFoundException {
+    public Graph readGraphFromFile(String fileName) throws FileNotFoundException {
 
         // Read graph from file
-        Scanner inpScanner = new Scanner(new File(inputFile));
+        Scanner inpScanner = new Scanner(new File(fileName));
         // Rerad number of vertecies and edges
         this.verticesNo = inpScanner.nextInt();
         this.edgeNo = inpScanner.nextInt();
@@ -154,19 +121,18 @@ public abstract class Graph {
             String lable = inpScanner.next();
             Vertex ver = creatVertex(lable);
             ver.setVisited(false);
-            vertices.add(ver);
-            vLeabelMap.put(lable, ver);
+            vertices.put(lable, ver);
         }
         // Create edges
         for (int i = 0; i < edgeNo; i++) {
-            // Read v , u and w
-            String vLable = inpScanner.next();
-            String uLable = inpScanner.next();
+            // Read source , diestination and w
+            String sLable = inpScanner.next();
+            String dLable = inpScanner.next();
             int w = inpScanner.nextInt();
-            Vertex v = vLeabelMap.get(vLable);
-            Vertex u = vLeabelMap.get(uLable);
+            Vertex s = vertices.get(sLable);
+            Vertex d = vertices.get(dLable);
             // Call method addEdge to add edges
-            addEdge(v, u, w);
+            addEdge(s, d, w);
         }
         // Close scanner
         inpScanner.close();

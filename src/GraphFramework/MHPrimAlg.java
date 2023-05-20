@@ -6,11 +6,9 @@
     3- Leen Ba Galaql
     4- Shatha Binmahfouz
  */
-package PhoneNetworkApp;
+package GraphFramework;
 
 //
-public class PhoneNWDesignApp {
-    public static void main(String[] args) {
+public class MHPrimAlg {
 
-    }
 }
