@@ -65,39 +65,27 @@ public abstract class Graph {
         // Create edges
         // To get random vertex and wight
         Random r = new Random();
-        for (int i = 0; i < edgeNo; i++) {
-            // Read v , u and w
-            int vLable_index = r.nextInt(verticesNo);
-            int uLable_index = r.nextInt(verticesNo);
-            // To avoid duplicate vertex ( 1- visited vertex 2- not visited and not equal
-            // visited )
-            while (vLable_index == uLable_index) {
-                uLable_index = r.nextInt(verticesNo);
+        int edgeCount = 0;
+        while (edgeCount < edgeNo) {
+            // Read source , diestination and w
+            String sLable = "O" + r.nextInt(verticesNo);
+            String dLable = "O" + r.nextInt(verticesNo);
+            Vertex s = vertices.get(sLable);
+            Vertex d = vertices.get(dLable);
+            /*
+             * 1- s != d ==> to check source and diestination are not the same
+             * 2- !s.adjList.contains(d) && !d.adjList.contains(s) ==> to check there is no
+             * edge between
+             */
+            if (s != d && !s.adjList.contains(d) && !d.adjList.contains(s)) {
+                // Random wight in range 1-50
+                int w = r.nextInt(50) + 1;
+                // Call method addEdge to add edges
+                addEdge(s, d, w);
+                edgeCount++;
             }
-            // Random wight in range 0-100
-            int w = r.nextInt(100) + 1;
-            Vertex v = vertices.get(vLable_index);
-            Vertex u = vertices.get(uLable_index);
-            // Call method addEdge to add edges
-            addEdge(v, u, w);
         }
-        // Create edges
-        // ------------------------------------------------------------check
-        // To get random vertex and wight
-        /*
-         * int edgeCount = 0;
-         * while (edgeCount < edgeNo) {
-         * Vertex v = vertices.get(r.nextInt(verticesNo));
-         * Vertex u = vertices.get(r.nextInt(verticesNo));
-         * if (v != u && !v.adjList.contains(u)) {
-         * // Random wight in range 1-50
-         * int w = r.nextInt(50) + 1;
-         * // Call method addEdge to add edges
-         * addEdge(v, u, w);
-         * edgeCount++;
-         * }
-         * }
-         */
+
         // Return graph
         return this;
 
