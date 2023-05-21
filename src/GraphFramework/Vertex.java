@@ -20,7 +20,7 @@ public abstract class Vertex {
     // Check if vertex is visited or not
     boolean isVisited = false;
     // Store adjacency list in LL (from association relationship)
-    LinkedList<Edge> adjList;
+    public LinkedList<Edge> adjList;
 
     // Contructors
     public Vertex() {

@@ -23,7 +23,7 @@ public abstract class Graph {
     // Check if graph is directed or not
     boolean isDigraph;
     // Map to can store and found vertex by label (from association relationship)
-    Map<String, Vertex> vertices;
+    public Map<String, Vertex> vertices;
 
     // ----------------------------------------------------------check
     // Map to can found Edge by source

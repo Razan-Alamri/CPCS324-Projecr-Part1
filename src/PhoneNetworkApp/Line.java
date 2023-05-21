@@ -35,8 +35,15 @@ public class Line extends Edge {
     * the information of the class attributes
     */
    @Override
+   /*
+    * public void displyInfo() {
+    * System.out.print("line length: " + lLength);
+    * }
+    */
    public void displyInfo() {
-      System.out.print("line length: " + lLength);
+      String sourceLabel = getSource().getLabel();
+      String targetLabel = getTarget().getLabel();
+      System.out.println("Office No. " + sourceLabel + " - Office No. " + targetLabel + " : line length: " + lLength);
    }
 
 }
