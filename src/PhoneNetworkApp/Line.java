@@ -21,7 +21,7 @@ public class Line extends Edge {
 
    // Contructor
    public Line(Vertex source, Vertex target, int weight) {
-      // Call a super class " Edge"
+      // Call a super class "Edge"
       super(source, target, weight);
       /*
        * The lLength attribute represents the line length and it is 5 times the weight
@@ -36,7 +36,7 @@ public class Line extends Edge {
     */
    @Override
    public void displyInfo() {
-      System.out.println("line length" + lLength);
+      System.out.print("line length: " + lLength);
    }
 
 }

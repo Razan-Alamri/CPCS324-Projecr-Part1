@@ -15,6 +15,12 @@ import GraphFramework.Vertex;
 // Graph is a subclass of Graph, it inherits all attributes, operations & relationships
 public class BluePrintsGraph extends Graph {
 
+   //
+   public BluePrintsGraph(int verticesNo, int edgeNo, boolean isDigraph) {
+      // Call a super class "Graph"
+      super(verticesNo, edgeNo, isDigraph);
+   }
+
    /*
     * Override abstract method from graph class
     * to create object of Vertex "Office"
