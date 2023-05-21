@@ -17,7 +17,7 @@ public class Line extends Edge {
    // Data filed
 
    // Line length
-   int lLength;
+   private int lLength;
 
    // Contructor
    public Line(Vertex source, Vertex target, int weight) {

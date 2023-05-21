@@ -8,7 +8,7 @@
  */
 package PhoneNetworkApp;
 
-//
+// PhNWDesignApp is a class. It is the starting point of the program and contains the main function
 public class PhoneNWDesignApp {
     public static void main(String[] args) {
 
