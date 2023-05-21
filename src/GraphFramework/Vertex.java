@@ -16,7 +16,7 @@ public abstract class Vertex {
     // Data filed
 
     // Represents the vertex label
-    String label;
+    protected String label;
     // Check if vertex is visited or not
     boolean isVisited = false;
     // Store adjacency list in LL (from association relationship)
@@ -37,10 +37,6 @@ public abstract class Vertex {
     // Setteers and Getters
     public String getLabel() {
         return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
     }
 
     public boolean isVisited() {

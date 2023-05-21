@@ -8,7 +8,23 @@
  */
 package PhoneNetworkApp;
 
+import GraphFramework.Edge;
+import GraphFramework.Graph;
+import GraphFramework.Vertex;
+
 //
-public class BluePrGraph {
+public class BluePrGraph extends Graph {
+
+   @Override
+   public Vertex creatVertex(String lable) {
+      // TODO Auto-generated method stub
+      throw new UnsupportedOperationException("Unimplemented method 'creatVertex'");
+   }
+
+   @Override
+   public Edge creatEdge(Vertex v, Vertex u, int w) {
+      // TODO Auto-generated method stub
+      throw new UnsupportedOperationException("Unimplemented method 'creatEdge'");
+   }
 
 }
