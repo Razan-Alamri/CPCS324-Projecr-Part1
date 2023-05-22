@@ -27,7 +27,7 @@ public class BluePrintsGraph extends Graph {
     */
    @Override
    public Vertex creatVertex(String lable) {
-      return new Office();
+      return new Office(lable);
 
    }
 
@@ -37,7 +37,7 @@ public class BluePrintsGraph extends Graph {
     */
    @Override
    public Edge creatEdge(Vertex v, Vertex u, int w) {
-      return new Line(u, u, w);
+      return new Line(v, u, w);
 
    }
 

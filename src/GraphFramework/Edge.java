@@ -23,9 +23,6 @@ public abstract class Edge {
     Vertex target;
 
     // Contructors
-    public Edge() {
-    }
-
     public Edge(Vertex source, Vertex target, int weight) {
         this.weight = weight;
         this.source = source;
