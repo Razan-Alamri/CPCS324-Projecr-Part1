@@ -25,21 +25,21 @@ public class PhoneNWDesignApp {
         PhLNetwork.makeGraph();
 
         // Print the graph using the displayInfo() method of the Line class
-        /*
-         * for (String label : PhLNetwork.vertices.keySet()) {
-         * Vertex vertex = PhLNetwork.vertices.get(label);
-         * for (Edge edge : vertex.adjList) {
-         * Line line = (Line) edge;
-         * line.displyInfo();
-         * }
-         * }
-         */
 
-        for (Vertex v : PhLNetwork.vertices.values()) {
-            for (Edge e : v.adjList) {
-                e.displyInfo();
+        for (String label : PhLNetwork.vertices.keySet()) {
+            Vertex vertex = PhLNetwork.vertices.get(label);
+            for (Edge edge : vertex.adjList) {
+                Line line = (Line) edge;
+                line.displyInfo();
             }
         }
 
+        /*
+         * for (Vertex v : PhLNetwork.vertices.values()) {
+         * for (Edge e : v.adjList) {
+         * e.displyInfo();
+         * }
+         * }
+         */
     }
 }
