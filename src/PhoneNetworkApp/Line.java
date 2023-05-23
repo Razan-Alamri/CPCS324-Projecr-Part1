@@ -43,7 +43,7 @@ public class Line extends Edge {
    public void displyInfo() {
       String sourceLabel = getSource().getLabel();
       String targetLabel = getTarget().getLabel();
-      System.out.println("Office No. " + sourceLabel + " - Office No. " + targetLabel + " : line length: " + lLength);
+      System.out.println(getSource().displyInfo() + " - " + getTarget().displyInfo() + " : line length: " + lLength);
    }
 
 }

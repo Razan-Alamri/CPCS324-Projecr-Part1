@@ -27,13 +27,15 @@ public class PhoneNWDesignApp {
         // Print the graph using the displayInfo() method of the Line class
         for (Vertex v : PhLNetwork.vertices.values()) {
             for (Edge e : v.getAdjList()) {
-                if (e instanceof Line) { // Only print Line edges
+                // Only print Line edges
+                if (e instanceof Line) {
                     Line line = (Line) e;
                     String sourceLabel = line.getSource().getLabel();
                     String targetLabel = line.getTarget().getLabel();
-                    if (sourceLabel.compareTo(targetLabel) < 0) { // Only print if source label is smaller than target
-                                                                  // label
-                        line.displyInfo(); // Print edge info
+                    // Only print if source label is smaller than targetlabel
+                    if (sourceLabel.compareTo(targetLabel) < 0) {
+                        // Print edge info
+                        line.displyInfo();
                     }
                 }
             }

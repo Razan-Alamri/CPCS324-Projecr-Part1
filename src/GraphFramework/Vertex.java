@@ -35,7 +35,7 @@ public abstract class Vertex {
     }
 
     // Method is responsible for displaying the information of the class attributes.
-    public abstract void displyInfo();
+    public abstract String displyInfo();
 
     //
     // Check if this vertex is adjacent to another vertex

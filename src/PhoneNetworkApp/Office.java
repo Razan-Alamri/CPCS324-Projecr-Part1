@@ -28,7 +28,8 @@ public class Office extends Vertex {
     * the information of the class attributes
     */
    @Override
-   public void displyInfo() {
-      System.out.print("Office No." + getLabel());
+   public String displyInfo() {
+
+      return "Office No." + getLabel();
    }
 }
