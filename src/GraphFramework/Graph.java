@@ -110,17 +110,11 @@ public abstract class Graph {
      * whose name is inputFile
      */
     public Graph readGraphFromFile(File fileName) throws FileNotFoundException {
-
-        // Read graph from file
         Scanner inpScanner = new Scanner(fileName);
 
         // Read header information
         String graphname = inpScanner.next();
         int is_Digraph = inpScanner.nextInt();
-        /*
-         * Read the grapg type if input 0 means it is an undirected graph
-         * if input 1 means it is an directed graph
-         */
         if (is_Digraph == 1) {
             this.isDigraph = true;
         } else if (is_Digraph == 0) {
@@ -129,25 +123,31 @@ public abstract class Graph {
         this.verticesNo = inpScanner.nextInt();
         this.edgeNo = inpScanner.nextInt();
 
-        // Create vertices and edges
+        // Create vertices
         while (inpScanner.hasNext()) {
-            // Read source, destination, and weight
             String sLabel = inpScanner.next();
             String dLabel = inpScanner.next();
             int weight = inpScanner.nextInt();
 
-            // Get source vertex
-            Vertex s = creatVertex(sLabel);
-            vertices.put(sLabel, s);
-            // Get destination vertex
-            Vertex d = creatVertex(dLabel);
-            vertices.put(dLabel, d);
+            // Get or create source vertex
+            Vertex s = vertices.get(sLabel);
+            if (s == null) {
+                s = creatVertex(sLabel);
+                vertices.put(sLabel, s);
+            }
+
+            // Get or create destination vertex
+            Vertex d = vertices.get(dLabel);
+            if (d == null) {
+                d = creatVertex(dLabel);
+                vertices.put(dLabel, d);
+            }
+
+            // Add edge between source and destination vertices
             addEdge(s, d, weight);
         }
 
-        // Close scanner
         inpScanner.close();
-        // Return graph
         return this;
     }
 

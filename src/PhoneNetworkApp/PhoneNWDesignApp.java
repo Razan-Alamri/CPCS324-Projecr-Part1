@@ -20,9 +20,9 @@ public class PhoneNWDesignApp {
         // Create a new graph object
         Graph PhLNetwork = new BluePrintsGraph();
 
-        // File InputFile = new File("InputGraph.txt");
-        // PhLNetwork.readGraphFromFile(InputFile);
-        PhLNetwork.makeGraph(6, 7);
+        File InputFile = new File("InputGraph.txt");
+        PhLNetwork.readGraphFromFile(InputFile);
+        // PhLNetwork.makeGraph(6, 7);
 
         // Print the graph using the displayInfo() method of the Line class
         for (Vertex v : PhLNetwork.vertices.values()) {
@@ -38,12 +38,6 @@ public class PhoneNWDesignApp {
                 }
             }
         }
-        /*
-         * for (Vertex v : PhLNetwork.vertices.values()) {
-         * for (Edge e : v.adjList) {
-         * e.displyInfo();
-         * }
-         * }
-         */
+
     }
 }
