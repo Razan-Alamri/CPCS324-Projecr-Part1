@@ -62,12 +62,15 @@ public abstract class Graph {
         for (int i = 0; i < n; i++) {
             int labelNum = rand.nextInt(n);
             String label = "O" + labelNum;
+            // initializ vertex
             Vertex v = creatVertex(label);
+            // To avoid Vertex duplicate
             while (vertices.containsKey(label)) {
                 labelNum = rand.nextInt(n);
                 label = "O" + labelNum;
                 v = creatVertex(label);
             }
+            // Add vertex to map
             vertices.put(label, v);
         }
 
@@ -78,6 +81,10 @@ public abstract class Graph {
             List<String> labels = new ArrayList<>(vertices.keySet());
             String label1 = labels.get(rand.nextInt(labels.size()));
             String label2 = labels.get(rand.nextInt(labels.size()));
+            /*
+             * label1.equals(label2) -> to check source and diestination are not the same
+             * edgeSet.contains(label1+":"+label2) -> to check there is no edge between them
+             */
             while (label1.equals(label2) || edgeSet.contains(label1 + ":" + label2)) {
                 label1 = labels.get(rand.nextInt(labels.size()));
                 label2 = labels.get(rand.nextInt(labels.size()));
@@ -86,9 +93,12 @@ public abstract class Graph {
             // Create edge with random weight
             Vertex v = vertices.get(label1);
             Vertex u = vertices.get(label2);
-            int weight = rand.nextInt(100) + 1; // Random weight between 1 and 100
+            // Random weight between 1 and 50
+            int weight = rand.nextInt(50) + 1;
+            // Call method addEdge to add edges
             addEdge(v, u, weight);
-            edgeSet.add(label1 + ":" + label2); // Add edge to set to prevent duplicates
+            // Add edge to set to prevent duplicates
+            edgeSet.add(label1 + ":" + label2);
         }
 
         // Return the current Graph object
