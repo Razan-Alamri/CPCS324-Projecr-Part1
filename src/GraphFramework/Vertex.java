@@ -11,7 +11,7 @@ package GraphFramework;
 import java.util.*;
 
 // Vertex is a class that represents a graph vertex
-public abstract class Vertex {
+public class Vertex {
 
     // Data filed
 
@@ -35,7 +35,9 @@ public abstract class Vertex {
     }
 
     // Method is responsible for displaying the information of the class attributes.
-    public abstract String displyInfo();
+    public String displyInfo() {
+        return "Vertex " + getLabel();
+    }
 
     //
     // Check if this vertex is adjacent to another vertex

@@ -9,7 +9,7 @@
 package GraphFramework;
 
 // Edge is a class that represents a graph edge
-public abstract class Edge {
+public class Edge {
 
     // Data filed
 
@@ -31,7 +31,9 @@ public abstract class Edge {
     }
 
     // Method is responsible for displaying the information of the class attributes.
-    public abstract void displyInfo();
+    public void displyInfo() {
+        System.out.println(source.displyInfo() + " - " + target.displyInfo() + " : " + weight);
+    }
 
     // Setteers and Getters
     public int getWeight() {
