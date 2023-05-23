@@ -16,6 +16,11 @@ import GraphFramework.Vertex;
 public class BluePrintsGraph extends Graph {
 
    // Contructors
+   public BluePrintsGraph() {
+      // Call a super class "Graph"
+      super();
+   }
+
    public BluePrintsGraph(int verticesNo, int edgeNo, boolean isDigraph) {
       // Call a super class "Graph"
       super(verticesNo, edgeNo, isDigraph);

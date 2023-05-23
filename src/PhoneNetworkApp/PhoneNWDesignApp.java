@@ -18,22 +18,26 @@ public class PhoneNWDesignApp {
     public static void main(String[] args) throws FileNotFoundException {
 
         // Create a new graph object
-        Graph PhLNetwork = new BluePrintsGraph(6, 8, false);
+        Graph PhLNetwork = new BluePrintsGraph();
 
         // File InputFile = new File("InputGraph.txt");
         // PhLNetwork.readGraphFromFile(InputFile);
-        PhLNetwork.makeGraph();
+        PhLNetwork.makeGraph(6, 7);
 
         // Print the graph using the displayInfo() method of the Line class
-
-        for (String label : PhLNetwork.vertices.keySet()) {
-            Vertex vertex = PhLNetwork.vertices.get(label);
-            for (Edge edge : vertex.adjList) {
-                Line line = (Line) edge;
-                line.displyInfo();
+        for (Vertex v : PhLNetwork.vertices.values()) {
+            for (Edge e : v.getAdjList()) {
+                if (e instanceof Line) { // Only print Line edges
+                    Line line = (Line) e;
+                    String sourceLabel = line.getSource().getLabel();
+                    String targetLabel = line.getTarget().getLabel();
+                    if (sourceLabel.compareTo(targetLabel) < 0) { // Only print if source label is smaller than target
+                                                                  // label
+                        line.displyInfo(); // Print edge info
+                    }
+                }
             }
         }
-
         /*
          * for (Vertex v : PhLNetwork.vertices.values()) {
          * for (Edge e : v.adjList) {

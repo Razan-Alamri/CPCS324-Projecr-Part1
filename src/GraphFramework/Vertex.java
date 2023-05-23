@@ -37,6 +37,17 @@ public abstract class Vertex {
     // Method is responsible for displaying the information of the class attributes.
     public abstract void displyInfo();
 
+    //
+    // Check if this vertex is adjacent to another vertex
+    public boolean isAdjacent(Vertex other) {
+        for (Edge edge : adjList) {
+            if (edge.target == other) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // Setteers and Getters
     public String getLabel() {
         return label;

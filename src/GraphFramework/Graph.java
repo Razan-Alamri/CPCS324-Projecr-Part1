@@ -9,7 +9,7 @@
 package GraphFramework;
 
 import java.io.*;
-import java.util.*;;
+import java.util.*;
 
 // Graph is a class defines the structure of a graph
 public abstract class Graph {
@@ -56,63 +56,43 @@ public abstract class Graph {
      * creating edges that connects the created vertices randomly and
      * assigning them random weights.
      */
-    public Graph makeGraph() {
-        // To get random vertex and wight
-        Random r = new Random();
-        // Create vertices
-        for (int i = 0; i < verticesNo - 1; i++) {
-            // Lable of vertex (name of labeal will be VertexN where N is number )
-            String slable = "O" + (i + 1);
-            String dlable = "O" + (i + 2);
-            Vertex verS = creatVertex(slable);
-            Vertex verD = creatVertex(dlable);
-            verS.setVisited(false);
-            vertices.put(slable, verS);
-            verD.setVisited(false);
-            vertices.put(dlable, verD);
-            // Random wight in range 1-50
-            int w = r.nextInt(50) + 1;
-            addEdge(verS, verD, w);
-            System.out.println(verS.getLabel() + " " + verD.getLabel());
-        }
-        // remaning edge
-        int remaining = edgeNo - (verticesNo - 1);
-        // Create edges
-        for (int i = 0; i < remaining; i++) {
-            // Read source , diestination and w
-            // Get a random entry from the HashMap.
-            Object[] crunchifyKeys = vertices.keySet().toArray();
-            Object key1 = crunchifyKeys[new Random().nextInt(crunchifyKeys.length)];
-            Object key2 = crunchifyKeys[new Random().nextInt(crunchifyKeys.length)];
-            // String sLable ="O" + r.nextInt(remaining);
-            // String dLable = "O" + r.nextInt(remaining);
-            Vertex s = vertices.get(key1);
-            Vertex d = vertices.get(key2);
-            int weight = r.nextInt(50) + 1;
-            System.out.println(key1 + "'   " + key2);
-            //
-            // to avoid duplicate edges
-            if (s == d || isConnected(s, d)) {
-                i--;
-            } else {
-                // add edge to graph
-                System.out.println(s.getLabel() + " " + d.getLabel() + " w " + weight);
-                addEdge(s, d, weight);
+    public Graph makeGraph(int n, int m) {
+        // Create n vertices with random labels
+        Random rand = new Random();
+        for (int i = 0; i < n; i++) {
+            int labelNum = rand.nextInt(n);
+            String label = "O" + labelNum;
+            Vertex v = creatVertex(label);
+            while (vertices.containsKey(label)) {
+                labelNum = rand.nextInt(n);
+                label = "O" + labelNum;
+                v = creatVertex(label);
             }
+            vertices.put(label, v);
         }
+
+        // Create m edges randomly between vertices
+        HashSet<String> edgeSet = new HashSet<>();
+        for (int i = 0; i < m; i++) {
+            // Choose two random vertices
+            List<String> labels = new ArrayList<>(vertices.keySet());
+            String label1 = labels.get(rand.nextInt(labels.size()));
+            String label2 = labels.get(rand.nextInt(labels.size()));
+            while (label1.equals(label2) || edgeSet.contains(label1 + ":" + label2)) {
+                label1 = labels.get(rand.nextInt(labels.size()));
+                label2 = labels.get(rand.nextInt(labels.size()));
+            }
+
+            // Create edge with random weight
+            Vertex v = vertices.get(label1);
+            Vertex u = vertices.get(label2);
+            int weight = rand.nextInt(100) + 1; // Random weight between 1 and 100
+            addEdge(v, u, weight);
+            edgeSet.add(label1 + ":" + label2); // Add edge to set to prevent duplicates
+        }
+
+        // Return the current Graph object
         return this;
-    }
-
-    // check if the edge is exist and connect
-    public boolean isConnected(Vertex source, Vertex target) {
-        for (Edge edge : source.adjList) {
-            if ((edge.source == source && edge.target == target)
-                    || (edge.source == target && edge.target == source)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /*
@@ -125,8 +105,17 @@ public abstract class Graph {
         Scanner inpScanner = new Scanner(fileName);
 
         // Read header information
-        String graphType = inpScanner.next();
-        int isDigraph = inpScanner.nextInt();
+        String graphname = inpScanner.next();
+        int is_Digraph = inpScanner.nextInt();
+        /*
+         * Read the grapg type if input 0 means it is an undirected graph
+         * if input 1 means it is an directed graph
+         */
+        if (is_Digraph == 1) {
+            this.isDigraph = true;
+        } else if (is_Digraph == 0) {
+            this.isDigraph = false;
+        }
         this.verticesNo = inpScanner.nextInt();
         this.edgeNo = inpScanner.nextInt();
 
