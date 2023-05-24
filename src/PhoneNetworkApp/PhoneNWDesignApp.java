@@ -20,99 +20,114 @@ public class PhoneNWDesignApp {
     public static void main(String[] args) throws FileNotFoundException {
 
         /* اضيف خيار يقراء من ملف او يختار وبعدها اضبط كومنت واسماء واستدعاء القورثم */
-        //
+        // To read input from user
         Scanner input = new Scanner(System.in);
+        // To store running time of each algorithm
+        double start_Time, end_Time;
 
-        //
-        System.out.println("\t ------------Minimum Spanning Tree Algorithms-----------\n");
-        System.out.println("\t1- Kruskal's Algorithm& Priority Queue based Prim Algorithem\n"
-                + "\t2- Min Heap bease on Prim Algorithm & Prim's Algorithm(based on Priority Queue)");
+        // Print Hedar massege
+        System.out.println("----------------------------------------------------------------------------------");
+        System.out.println("-------              Welcome to Phone Network Design Ptogram               -------");
+        System.out.println("----------------------------------------------------------------------------------");
 
-        System.out.print(">>> Enter your choice (1 or 2) : ");
-        int comparison = input.nextInt();
+        System.out.println("\n This program to Compute the minimum spanning tree using two algorithms:");
+        System.out.println("\t1- Kruskal's Algorithm");
+        System.out.println("\t2- Min-heap based Prim algorithm");
+        System.out.println("\n----------------------------------------------------------------------------------");
 
-        System.out.println(">>> n is the number of vertices) and (m is the number of edges) : ");
-        System.out.println(" 1: Read Graph From File");
-        System.out.println(" 2:  n=1,000 ,  m=10,000");
-        System.out.println(" 3:  n=1,000 ,  m=15,000");
-        System.out.println(" 4:  n=1,000 ,  m=25,000");
-        System.out.println(" 5:  n=5,000 ,  m=15,000");
-        System.out.println(" 6:  n=5,000 ,  m=25,000");
-        System.out.println(" 7:  n=10,000 , m=15,000");
-        System.out.println(" 8:  n=10,000 , m=25,000");
-        System.out.println(" 9:  n=20,000 , m=200,000");
-        System.out.println(" 10:  n=20,000 , m=300,000");
-        System.out.println("11:  n=50,000 , m=1,000,000");
-        System.out.print("\n>>> Enter a case to test : ");
-        int Case = input.nextInt();
+        // To disply menu of test cases can do
+        System.out.println("\n<<  Test Cases  >>\n");
+        System.out.println(" 1:  Read Phone Network Design From File");
+        System.out.println(" 2:  n = 1000 and  m = 10000");
+        System.out.println(" 3:  n = 1000 and  m = 15000");
+        System.out.println(" 4:  n = 1000 and  m = 25000");
+        System.out.println(" 5:  n = 5000 and  m = 15000");
+        System.out.println(" 6:  n = 5000 and  m = 25000");
+        System.out.println(" 7:  n = 10000 and m = 15000");
+        System.out.println(" 8:  n = 10000 and m = 25000");
+        System.out.println();
+        System.out.println("< NOTE: n is the number of offices and m is the number of Lines >");
+        System.out.print("\n> From these cases, please enter your choice: ");
+        // To save number of test Case choice
+        int test_Case = input.nextInt();
 
-        switch (Case) {
+        // Create a new graph object
+        Graph PhLNetwork;
+
+        // To get test case
+        switch (test_Case) {
             case 1:
-                graph(0, 0, comparison);
+                // Create a new graph object
+                PhLNetwork = new BluePrintsGraph();
+                File InputFile = new File("InputGraph.txt");
+                PhLNetwork.readGraphFromFile(InputFile);
                 break;
             case 2:
-
-                graph(1000, 10000, comparison);
+                // Create a new graph object
+                PhLNetwork = new BluePrintsGraph();
+                PhLNetwork.makeGraph(1000, 10000);
                 break;
             case 3:
-                graph(1000, 15000, comparison);
+                // Create a new graph object
+                PhLNetwork = new BluePrintsGraph();
+                PhLNetwork.makeGraph(1000, 15000);
                 break;
             case 4:
-                graph(1000, 25000, comparison);
+                // Create a new graph object
+                PhLNetwork = new BluePrintsGraph();
+                PhLNetwork.makeGraph(1000, 25000);
                 break;
             case 5:
-                graph(5000, 15000, comparison);
+                // Create a new graph object
+                PhLNetwork = new BluePrintsGraph();
+                PhLNetwork.makeGraph(5000, 15000);
                 break;
             case 6:
-                graph(5000, 25000, comparison);
+                // Create a new graph object
+                PhLNetwork = new BluePrintsGraph();
+                PhLNetwork.makeGraph(5000, 25000);
                 break;
             case 7:
-                graph(10000, 15000, comparison);
+                // Create a new graph object
+                PhLNetwork = new BluePrintsGraph();
+                PhLNetwork.makeGraph(10000, 15000);
                 break;
             case 8:
-                graph(10000, 25000, comparison);
-                break;
-            case 9:
-                graph(20000, 200000, comparison);
-                break;
-            case 10:
-                graph(20000, 300000, comparison);
-                break;
-            case 11:
-                graph(50000, 1000000, comparison);
+                // Create a new graph object
+                PhLNetwork = new BluePrintsGraph();
+                PhLNetwork.makeGraph(10000, 25000);
                 break;
             default:
-                System.out.println("---Invalid input!---");
+                System.out.println("<   Invalid input!  >");
                 break;
         }
+
+        // Apply two algoritms and compute the run time for each algorithm
+        System.out.println("----------------------------------------------------------------------------------");
+        System.out.println();
+        // - Compute the minimum spanning tree using Kruskal algorithm and print the
+        // result
+        start_Time = System.currentTimeMillis();
+        // ***********************************************************************************************************
+        // */
+        // PhLNetwork.kruskal();
+        end_Time = System.currentTimeMillis();
+
+        System.out.println("Kruskal's Algorithm's run time is  " + (end_Time - start_Time) + " ms.\n");
+
+        // Compute the minimum spanning tree using Min-heap based Prim algorithm and
+        // print the result
+        start_Time = System.currentTimeMillis();
+        // ***********************************************************************************************************
+        // */
+        // PhLNetwork.primMH();
+        end_Time = System.currentTimeMillis();
+
+        System.out.println("Min-heap based Prim Algorithm's run time is  " + (end_Time - start_Time) + " ms.\n");
+
+        // Print Hedar massege
+        System.out.println("----------------------------------------------------------------------------------");
+        System.out.println("-------         Thank You For Using Phone Network Design Ptogram           -------");
+        System.out.println("----------------------------------------------------------------------------------");
     }
-
-    public static void graph(int n, int m, int comparison) throws FileNotFoundException {
-
-        System.out.println("-------------------------(" + n + ")---------------------------");
-        // Create a new graph object
-        Graph PhLNetwork = new BluePrintsGraph();
-        File InputFile = new File("InputGraph.txt");
-        PhLNetwork.readGraphFromFile(InputFile);
-        // PhLNetwork.makeGraph(n, m);
-
-        // Print the graph using the displayInfo() method of the Line class
-        for (Vertex v : PhLNetwork.vertices.values()) {
-            for (Edge e : v.getAdjList()) {
-                // Only print Line edges
-                if (e instanceof Line) {
-                    Line line = (Line) e;
-                    String sourceLabel = line.getSource().getLabel();
-                    String targetLabel = line.getTarget().getLabel();
-                    // Only print if source label is smaller than targetlabel
-                    if (sourceLabel.compareTo(targetLabel) < 0) {
-                        // Print edge info
-                        line.displyInfo();
-                    }
-                }
-            }
-        }
-
-    }
-
 }
