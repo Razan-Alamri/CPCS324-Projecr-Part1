@@ -10,7 +10,6 @@ package PhoneNetworkApp;
 
 import java.io.*;
 import java.util.Scanner;
-
 import GraphFramework.Edge;
 import GraphFramework.Graph;
 import GraphFramework.Vertex;
