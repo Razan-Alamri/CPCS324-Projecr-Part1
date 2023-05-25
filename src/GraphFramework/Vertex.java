@@ -24,7 +24,7 @@ public abstract class Vertex {
 
     // Contructors
     public Vertex() {
-        this.label = "O";
+        this.label = "O" + 0;
         this.adjList = new LinkedList<Edge>();
     }
 

@@ -41,8 +41,6 @@ public class Line extends Edge {
     * }
     */
    public void displyInfo() {
-      String sourceLabel = getSource().getLabel();
-      String targetLabel = getTarget().getLabel();
       System.out.println(getSource().displyInfo() + " - " + getTarget().displyInfo() + " : line length: " + lLength);
    }
 

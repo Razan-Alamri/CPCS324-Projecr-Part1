@@ -16,13 +16,23 @@ objects of the type Edge. It stores the parent of the vertex and the weight need
 displayResultingMST(): it is an abstract function that should be implemented by the subclasses’
 polymorphic functions. */
 
-import java.util.List;
+import java.util.*;
 
 public abstract class MSTAlgorithm {
 
    protected Graph graph;
    protected List<Edge> MSTResultList;
 
+   public MSTAlgorithm(Graph graph) {
+      this.graph = graph;
+
+   }
+
+   public abstract void computeMST();
+
    public abstract void displayResultingMST();
 
+   public List<Edge> getMSTResultList() {
+      return MSTResultList;
+   }
 }

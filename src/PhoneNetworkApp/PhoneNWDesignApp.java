@@ -12,13 +12,14 @@ import java.io.*;
 import java.util.Scanner;
 import GraphFramework.Edge;
 import GraphFramework.Graph;
+import GraphFramework.KruskalAlg;
+import GraphFramework.MHPrimAlg;
 import GraphFramework.Vertex;
 
 // PhNWDesignApp is a class. It is the starting point of the program and contains the main function
 public class PhoneNWDesignApp {
     public static void main(String[] args) throws FileNotFoundException {
 
-        /* اضيف خيار يقراء من ملف او يختار وبعدها اضبط كومنت واسماء واستدعاء القورثم */
         // To read input from user
         Scanner input = new Scanner(System.in);
         // To store running time of each algorithm
@@ -51,7 +52,7 @@ public class PhoneNWDesignApp {
         int test_Case = input.nextInt();
 
         // Create a new graph object
-        Graph PhLNetwork;
+        Graph PhLNetwork = new BluePrintsGraph();
 
         // To get test case
         switch (test_Case) {
@@ -104,12 +105,15 @@ public class PhoneNWDesignApp {
         // Apply two algoritms and compute the run time for each algorithm
         System.out.println("----------------------------------------------------------------------------------");
         System.out.println();
+
         // - Compute the minimum spanning tree using Kruskal algorithm and print the
         // result
         start_Time = System.currentTimeMillis();
         // ***********************************************************************************************************
         // */
-        // PhLNetwork.kruskal();
+        // KruskalAlg kruskalAlg = new KruskalAlg();
+        // kruskalAlg.displayResultingMST();
+        // System.out.println("Minimum Spanning Tree cost: " + kruskalAlg.getMSTCost());
         end_Time = System.currentTimeMillis();
 
         System.out.println("Kruskal's Algorithm's run time is  " + (end_Time - start_Time) + " ms.\n");
@@ -119,7 +123,13 @@ public class PhoneNWDesignApp {
         start_Time = System.currentTimeMillis();
         // ***********************************************************************************************************
         // */
-        // PhLNetwork.primMH();
+
+        MHPrimAlg primAlg = new MHPrimAlg(PhLNetwork);
+        // Compute the minimum spanning tree using Prim's algorithm
+        primAlg.computeMST();
+        // Display the resulting MST
+        primAlg.displayResultingMST();
+
         end_Time = System.currentTimeMillis();
 
         System.out.println("Min-heap based Prim Algorithm's run time is  " + (end_Time - start_Time) + " ms.\n");
