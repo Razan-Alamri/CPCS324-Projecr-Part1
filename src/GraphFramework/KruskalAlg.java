@@ -31,32 +31,37 @@ public class KruskalAlg extends MSTAlgorithm {
     * @param input graph
     *
     */
-   public void KruskalAlg(Graph graph) {
-
-      int verticesNum = graph.verticesNo;// calculate number of vertices from the input graph
-      MSTResultList = new ArrayList<Edge>(verticesNum - 1);// V-1 edges needed to find the MST
-      // create a PriorityQueue to store edges beased on their wight
-      // Edge class implment the interface compareable and ovierride the compareTo
-      // method
-      ArrayList<Edge> result = new ArrayList<>(); // add all the edges in the adjacency list to the priorityQueue
-      // add all the edges in the adjacency list to the priorityQueue
-      // for (int i = 0; i < verticesNum; i++) {
-      // for all vertices
-      for (Map.Entry entry : graph.getVertices().entrySet()) {
-         // for all edges of verices
-         for (int i = 0; i < graph.getVertices().get(entry.getKey()).adjList.size(); i++) {
-            // add to the priorityQueue
-            result.add(graph.getVertices().get(entry.getKey()).adjList.get(i));
-         }
-      }
-      // Collections.sort(result);
-
-   }
-
-   // create an array for subsets
-   // Edge[] subsets = new Edge[verticesNum];
-
    /*
+    * public void KruskalAlg(Graph graph) {
+    * 
+    * int verticesNum = graph.verticesNo;// calculate number of vertices from the
+    * input graph
+    * MSTResultList = new ArrayList<Edge>(verticesNum - 1);// V-1 edges needed to
+    * find the MST
+    * // create a PriorityQueue to store edges beased on their wight
+    * // Edge class implment the interface compareable and ovierride the compareTo
+    * // method
+    * ArrayList<Edge> result = new ArrayList<>(); // add all the edges in the
+    * adjacency list to the priorityQueue
+    * // add all the edges in the adjacency list to the priorityQueue
+    * // for (int i = 0; i < verticesNum; i++) {
+    * // for all vertices
+    * for (Map.Entry entry : graph.getVertices().entrySet()) {
+    * // for all edges of verices
+    * for (int i = 0; i < graph.getVertices().get(entry.getKey()).adjList.size();
+    * i++) {
+    * // add to the priorityQueue
+    * result.add(graph.getVertices().get(entry.getKey()).adjList.get(i));
+    * }
+    * }
+    * // Collections.sort(result);
+    * 
+    * }
+    * 
+    * // create an array for subsets
+    * // Edge[] subsets = new Edge[verticesNum];
+    * 
+    * /*
     * makeSet(subsets);// make sets of each vertex in the graph
     * int MSTedges = 0;// to indicate the number of edges in the graph Et
     * int n = 0;

@@ -35,18 +35,14 @@ public class MHPrimAlg extends MSTAlgorithm {
     public void computeMST() {
         // Initialize MSTResultList and visited vertices
         MSTResultList = new ArrayList<>();
-        boolean[] visited = new boolean[graph.getVerticesNo()];
+        boolean[] visited = new boolean[graph.verticesNo];
 
         // Create a min-heap of edges
-        PriorityQueue<Edge> minHeap = new PriorityQueue<>(graph.getEdgeNo(),
+        PriorityQueue<Edge> minHeap = new PriorityQueue<>(graph.edgeNo,
                 (e1, e2) -> Integer.compare(e1.getWeight(), e2.getWeight()));
 
         // Find the vertex with label "0"
         Vertex startVertex = graph.vertices.get("O1");
-        if (startVertex == null) {
-            // The vertex with label "0" is notpresent in the graph
-            return;
-        }
 
         // Add the edges incident to the start vertex to the min-heap
         visited[startVertex.hashCode()] = true;
