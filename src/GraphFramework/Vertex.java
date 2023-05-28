@@ -26,7 +26,6 @@ public abstract class Vertex {
 
     // Contructors
     public Vertex() {
-        this.label = "O" + 0;
         this.adjList = new LinkedList<Edge>();
     }
 
@@ -40,7 +39,6 @@ public abstract class Vertex {
     // Method is responsible for displaying the information of the class attributes.
     public abstract String displyInfo();
 
-    //
     // Check if this vertex is adjacent to another vertex
     public boolean isAdjacent(Vertex other) {
         for (Edge edge : adjList) {

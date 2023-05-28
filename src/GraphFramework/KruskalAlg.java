@@ -161,9 +161,4 @@ public class KruskalAlg extends MSTAlgorithm {
       return cost;
    }
 
-   @Override
-   public void computeMST() {
-      // TODO Auto-generated method stub
-      throw new UnsupportedOperationException("Unimplemented method 'computeMST'");
-   }
 }

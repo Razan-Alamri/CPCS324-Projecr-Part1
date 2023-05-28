@@ -8,6 +8,8 @@
  */
 package GraphFramework;
 
+import PhoneNetworkApp.Office;
+
 // Edge is a class that represents a graph edge
 public abstract class Edge {
 
@@ -25,9 +27,9 @@ public abstract class Edge {
     // Contructors
     public Edge() {
         this.weight = 0;
-        this.source = null;
-        this.target = null;
-        this.parent = null;
+        this.source = new Office();
+        this.target = new Office();
+        this.parent = new Office();
     }
 
     public Edge(Vertex source, Vertex target, int weight) {

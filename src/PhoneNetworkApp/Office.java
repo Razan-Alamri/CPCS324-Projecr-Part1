@@ -14,8 +14,11 @@ import GraphFramework.Vertex;
 public class Office extends Vertex {
 
    public Office(String lable, int id) {
-      super.label = lable;
-      super.ID = id;
+      super(lable, id);
+   }
+
+   public Office() {
+      super();
    }
 
    // Method to set label
