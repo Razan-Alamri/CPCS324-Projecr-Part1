@@ -13,9 +13,9 @@ import GraphFramework.Vertex;
 // Office is a subclass of Vertex, it inherits all attributes, operations & relationships
 public class Office extends Vertex {
 
-   public Office(String lable) {
+   public Office(String lable, int id) {
       super.label = lable;
-
+      super.ID = id;
    }
 
    // Method to set label

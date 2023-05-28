@@ -23,11 +23,18 @@ public abstract class Edge {
     Vertex target;
 
     // Contructors
+    public Edge() {
+        this.weight = 0;
+        this.source = null;
+        this.target = null;
+        this.parent = null;
+    }
+
     public Edge(Vertex source, Vertex target, int weight) {
         this.weight = weight;
         this.source = source;
         this.target = target;
-        this.parent = source;
+        this.parent = null;
     }
 
     // Method is responsible for displaying the information of the class attributes.

@@ -30,6 +30,13 @@ public class Line extends Edge {
       lLength = weight * 5;
    }
 
+   // Contructor
+   public Line() {
+      // Call a super class "Edge"
+      super();
+
+   }
+
    /*
     * Override method that responsible for displaying
     * the information of the class attributes

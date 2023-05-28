@@ -28,11 +28,6 @@ public abstract class MSTAlgorithm {
 
    }
 
-   public abstract void computeMST();
-
    public abstract void displayResultingMST();
 
-   public List<Edge> getMSTResultList() {
-      return MSTResultList;
-   }
 }

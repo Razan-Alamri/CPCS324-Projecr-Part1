@@ -21,6 +21,8 @@ public abstract class Vertex {
     boolean isVisited = false;
     // Store adjacency list in LL (from association relationship)
     public LinkedList<Edge> adjList;
+    //
+    protected int ID;
 
     // Contructors
     public Vertex() {
@@ -29,9 +31,10 @@ public abstract class Vertex {
     }
 
     // Contructors
-    public Vertex(String label) {
+    public Vertex(String label, int ID) {
         this.label = label;
         this.adjList = new LinkedList<Edge>();
+        this.ID = ID;
     }
 
     // Method is responsible for displaying the information of the class attributes.

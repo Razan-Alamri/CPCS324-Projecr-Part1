@@ -10,11 +10,14 @@ package GraphFramework;
 
 import java.util.*;
 
-/* MHPrimAlg: is a subclass of MSTAlgorithm. It implements the polymorphic operation
-displayResultingMST(). Make sure it calls the displayInfo() method of the Vertex and Edge
-classes.
+import PhoneNetworkApp.Line;
+import PhoneNetworkApp.Office;
+
+/* MHPrimAlg is a subclass of MSTAlgorithm that implements the minimum spanning tree
+ *  algorithm using the modified heap-based Prim's algorithm.
  */
 public class MHPrimAlg extends MSTAlgorithm {
+
     public MHPrimAlg(Graph graph) {
         super(graph);
         this.MSTResultList = new ArrayList<>();
@@ -22,56 +25,61 @@ public class MHPrimAlg extends MSTAlgorithm {
 
     @Override
     public void displayResultingMST() {
-        int totalCost = 0;
-        System.out.println(MSTResultList);
-        for (Edge e : MSTResultList) {
-            System.out.printf("Office No. %s - Office No. %s : line length: %d\n",
-                    e.getSource().getLabel(), e.getTarget().getLabel(), e.getWeight());
-            totalCost += e.getWeight();
-        }
-        System.out.println("The cost of designed phone network: " + totalCost);
-    }
+        //
 
-    public void computeMST() {
-        // Initialize MSTResultList and visited vertices
-        MSTResultList = new ArrayList<>();
-        boolean[] visited = new boolean[graph.verticesNo];
+        Map<Integer, Vertex> IndexVertex = new HashMap<>();
 
-        // Create a min-heap of edges
-        PriorityQueue<Edge> minHeap = new PriorityQueue<>(graph.edgeNo,
-                (e1, e2) -> Integer.compare(e1.getWeight(), e2.getWeight()));
-
-        // Find the vertex with label "0"
-        Vertex startVertex = graph.vertices.get("O1");
-
-        // Add the edges incident to the start vertex to the min-heap
-        visited[startVertex.hashCode()] = true;
-        for (Edge e : startVertex.getAdjList()) {
-            if (!visited[e.getTarget().hashCode()]) {
-                minHeap.add(e);
-            }
+        for (Map.Entry<String, Vertex> entry : graph.vertices.entrySet()) {
+            Vertex ver = entry.getValue();
+            IndexVertex.put(ver.ID, ver);
+            // System.out.println(ver.label + " " + ver.ID);
         }
 
-        // Repeatedly add the shortest edge to the MST until all vertices are visited
-        while (!minHeap.isEmpty()) {
-            // Remove the shortest edge from the min-heap
-            Edge e = minHeap.poll();
+        // Initialize the minimum priority queue
+        PriorityQueue<Edge> pq = new PriorityQueue<>(new EdgeComparator());
+        // Initialize the visited array
+        boolean[] visited = new boolean[graph.vertices.size()];
 
-            // Check if the target vertex of the edge is already visited
-            if (visited[e.getTarget().hashCode()]) {
-                continue;
-            }
+        // Start at the first vertex in the graph
+        System.out.println(graph.vertices.size());
+        String lb = IndexVertex.get(0).getLabel();
+        System.out.println(lb + "    " + graph.vertices.get(lb).ID);
+        Vertex startVertex = graph.vertices.get(lb);
+        visited[startVertex.ID + 1] = true;
 
-            // Add the edge to the MST and mark the target vertex as visited
-            MSTResultList.add(e);
-            visited[e.getTarget().hashCode()] = true;
+        // Add all edges from the start vertex to the priority queue
+        for (Edge edge : startVertex.getAdjList()) {
+            pq.offer(edge);
+        }
 
-            // Add the edges incident to the target vertex to the min-heap
-            for (Edge f : e.getTarget().getAdjList()) {
-                if (!visited[f.getTarget().hashCode()]) {
-                    minHeap.add(f);
+        // Loop until all vertices have been visited
+        while (!pq.isEmpty()) {
+            // Get the next lowest weight edge from the priority queue
+            Edge currentEdge = pq.poll();
+            Vertex currentVertex = currentEdge.target;
+
+            // If the current vertex has not been visited, add the edge to the MST
+            if (!visited[currentVertex.ID]) {
+                MSTResultList.add(currentEdge);
+                visited[currentVertex.ID] = true;
+
+                // Add all edges from the current vertex to the priorityqueue that connect to
+                // unvisited vertices
+                for (Edge edge : currentVertex.getAdjList()) {
+                    Vertex destVertex = edge.target;
+                    if (!visited[destVertex.ID]) {
+                        pq.offer(edge);
+                    }
                 }
             }
         }
+
+        // Display the resulting MST
+        System.out.println("Minimum Spanning Tree:");
+        for (Edge edge : MSTResultList) {
+            System.out.println(
+                    edge.getSource().getLabel() + " - " + edge.target.getLabel() + " : " + edge.getWeight());
+        }
     }
+
 }

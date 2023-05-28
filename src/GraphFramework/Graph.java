@@ -45,7 +45,7 @@ public abstract class Graph {
     }
 
     // Abstract method to create object of Vertex
-    public abstract Vertex creatVertex(String lable);
+    public abstract Vertex creatVertex(String lable, int ID);
 
     // Abstract method to create object of Edge
     public abstract Edge creatEdge(Vertex v, Vertex u, int w);
@@ -61,15 +61,16 @@ public abstract class Graph {
         Random rand = new Random();
         for (int i = 0; i < n; i++) {
             int labelNum = rand.nextInt(n);
-            String label = "O" + labelNum;
-            // initializ vertex
-            Vertex v = creatVertex(label);
+            String label = "O" + (i + 1);
+
             // To avoid Vertex duplicate
             while (vertices.containsKey(label)) {
                 labelNum = rand.nextInt(n);
                 label = "O" + labelNum;
-                v = creatVertex(label);
+                // v = creatVertex(label, i);
             }
+            // initializ vertex
+            Vertex v = creatVertex(label, i);
             // Add vertex to map
             vertices.put(label, v);
         }
@@ -123,6 +124,7 @@ public abstract class Graph {
         this.verticesNo = inpScanner.nextInt();
         this.edgeNo = inpScanner.nextInt();
 
+        int id = 0;
         // Create vertices
         while (inpScanner.hasNext()) {
             String sLabel = inpScanner.next();
@@ -132,17 +134,17 @@ public abstract class Graph {
             // Get or create source vertex
             Vertex s = vertices.get(sLabel);
             if (s == null) {
-                s = creatVertex(sLabel);
+                s = creatVertex(sLabel, id);
                 vertices.put(sLabel, s);
             }
 
             // Get or create destination vertex
             Vertex d = vertices.get(dLabel);
             if (d == null) {
-                d = creatVertex(dLabel);
+                d = creatVertex(dLabel, id);
                 vertices.put(dLabel, d);
             }
-
+            id++;
             // Add edge between source and destination vertices
             addEdge(s, d, weight);
         }
@@ -177,4 +179,37 @@ public abstract class Graph {
          */
         edgeNo += isDigraph ? 1 : 2;
     }
+
+    public int getVerticesNo() {
+        return verticesNo;
+    }
+
+    public void setVerticesNo(int verticesNo) {
+        this.verticesNo = verticesNo;
+    }
+
+    public int getEdgeNo() {
+        return edgeNo;
+    }
+
+    public void setEdgeNo(int edgeNo) {
+        this.edgeNo = edgeNo;
+    }
+
+    public boolean isDigraph() {
+        return isDigraph;
+    }
+
+    public void setDigraph(boolean isDigraph) {
+        this.isDigraph = isDigraph;
+    }
+
+    public Map<String, Vertex> getVertices() {
+        return vertices;
+    }
+
+    public void setVertices(Map<String, Vertex> vertices) {
+        this.vertices = vertices;
+    }
+
 }

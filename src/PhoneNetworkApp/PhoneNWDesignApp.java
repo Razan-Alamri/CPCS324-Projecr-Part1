@@ -126,8 +126,6 @@ public class PhoneNWDesignApp {
 
         MHPrimAlg primAlg = new MHPrimAlg(PhLNetwork);
         // Compute the minimum spanning tree using Prim's algorithm
-        primAlg.computeMST();
-        // Display the resulting MST
         primAlg.displayResultingMST();
 
         end_Time = System.currentTimeMillis();

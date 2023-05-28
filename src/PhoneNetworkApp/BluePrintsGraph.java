@@ -31,8 +31,8 @@ public class BluePrintsGraph extends Graph {
     * to create object of Vertex "Office"
     */
    @Override
-   public Vertex creatVertex(String lable) {
-      return new Office(lable);
+   public Vertex creatVertex(String lable, int ID) {
+      return new Office(lable, ID);
 
    }
 
