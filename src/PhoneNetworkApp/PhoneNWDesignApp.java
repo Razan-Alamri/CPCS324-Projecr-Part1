@@ -9,12 +9,8 @@
 package PhoneNetworkApp;
 
 import java.io.*;
-import java.util.Scanner;
-import GraphFramework.Edge;
-import GraphFramework.Graph;
-import GraphFramework.KruskalAlg;
-import GraphFramework.MHPrimAlg;
-import GraphFramework.Vertex;
+import java.util.*;
+import GraphFramework.*;
 
 // PhNWDesignApp is a class. It is the starting point of the program and contains the main function
 public class PhoneNWDesignApp {
@@ -27,7 +23,7 @@ public class PhoneNWDesignApp {
 
         // Print Hedar massege
         System.out.println("----------------------------------------------------------------------------------");
-        System.out.println("-------              Welcome to Phone Network Design Ptogram               -------");
+        System.out.println("-------              Welcome to Phone Network Design Program               -------");
         System.out.println("----------------------------------------------------------------------------------");
 
         System.out.println("\n This program to Compute the minimum spanning tree using two algorithms:");
@@ -135,7 +131,7 @@ public class PhoneNWDesignApp {
 
         // Print Hedar massege
         System.out.println("----------------------------------------------------------------------------------");
-        System.out.println("-------         Thank You For Using Phone Network Design Ptogram           -------");
+        System.out.println("-------         Thank You For Using Phone Network Design Program           -------");
         System.out.println("----------------------------------------------------------------------------------");
     }
 }
