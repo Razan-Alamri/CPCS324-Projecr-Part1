@@ -133,5 +133,8 @@ public class PhoneNWDesignApp {
         System.out.println("----------------------------------------------------------------------------------");
         System.out.println("-------         Thank You For Using Phone Network Design Program           -------");
         System.out.println("----------------------------------------------------------------------------------");
+
+        // Close scanner
+        input.close();
     }
 }

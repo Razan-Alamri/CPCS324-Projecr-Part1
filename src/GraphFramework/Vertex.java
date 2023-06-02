@@ -29,15 +29,11 @@ public abstract class Vertex {
         this.adjList = new LinkedList<Edge>();
     }
 
-    // Contructors
     public Vertex(String label, int ID) {
         this.label = label;
         this.adjList = new LinkedList<Edge>();
         this.ID = ID;
     }
-
-    // Method is responsible for displaying the information of the class attributes.
-    public abstract String displyInfo();
 
     // Check if this vertex is adjacent to another vertex
     public boolean isAdjacent(Vertex other) {
@@ -69,4 +65,7 @@ public abstract class Vertex {
     public void setAdjList(LinkedList<Edge> adjList) {
         this.adjList = adjList;
     }
+
+    // Method is responsible for displaying the information of the class attributes.
+    public abstract String displyInfo();
 }
