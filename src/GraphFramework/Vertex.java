@@ -8,7 +8,7 @@
  */
 package GraphFramework;
 
-import java.util.*;
+import java.util.LinkedList;
 
 // Vertex is a class that represents a graph vertex
 public abstract class Vertex {
@@ -16,29 +16,28 @@ public abstract class Vertex {
     // Data filed
 
     // Represents the vertex label
-    protected String label;
+    char label;
     // Check if vertex is visited or not
-    boolean isVisited = false;
+    boolean isVisited;
+    // Represents the vertex ID
+    int ID;
     // Store adjacency list in LL (from association relationship)
-    public LinkedList<Edge> adjList;
-    //
-    protected int ID;
+    LinkedList<Edge> adjList;
 
     // Contructors
     public Vertex() {
-        this.adjList = new LinkedList<Edge>();
+
     }
 
-    public Vertex(String label, int ID) {
-        this.label = label;
-        this.adjList = new LinkedList<Edge>();
+    public Vertex(int ID) {
         this.ID = ID;
+        adjList = new LinkedList<>();
     }
 
     // Check if this vertex is adjacent to another vertex
-    public boolean isAdjacent(Vertex other) {
+    public boolean isAdjacent(Vertex adj) {
         for (Edge edge : adjList) {
-            if (edge.target == other) {
+            if (edge.target == adj) {
                 return true;
             }
         }
@@ -46,8 +45,12 @@ public abstract class Vertex {
     }
 
     // Setteers and Getters
-    public String getLabel() {
+    public char getLabel() {
         return label;
+    }
+
+    public void setLabel(char label) {
+        this.label = label;
     }
 
     public boolean isVisited() {
@@ -66,6 +69,15 @@ public abstract class Vertex {
         this.adjList = adjList;
     }
 
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int iD) {
+        ID = iD;
+    }
+
     // Method is responsible for displaying the information of the class attributes.
     public abstract String displyInfo();
+
 }

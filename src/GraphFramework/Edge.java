@@ -8,10 +8,8 @@
  */
 package GraphFramework;
 
-import PhoneNetworkApp.Office;
-
 // Edge is a class that represents a graph edge
-public abstract class Edge {
+public abstract class Edge implements Comparable<Edge> {
 
     // Data filed
 
@@ -26,39 +24,21 @@ public abstract class Edge {
 
     // Contructors
     public Edge() {
-        this.weight = 0;
-        this.source = new Office();
-        this.target = new Office();
-        this.parent = new Office();
+
+    }
+
+    public Edge(int weight) {
+        this.weight = weight;
     }
 
     public Edge(Vertex source, Vertex target, int weight) {
-        this.weight = weight;
         this.source = source;
         this.target = target;
-        this.parent = null;
+        this.weight = weight;
+        this.parent = source;
     }
-
-    // Method is responsible for displaying the information of the class attributes.
-    public abstract void displyInfo();
 
     // Setteers and Getters
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
-    public Vertex getParent() {
-        return parent;
-    }
-
-    public void setParent(Vertex parent) {
-        this.parent = parent;
-    }
-
     public Vertex getSource() {
         return source;
     }
@@ -73,5 +53,29 @@ public abstract class Edge {
 
     public void setTarget(Vertex target) {
         this.target = target;
+    }
+
+    public Vertex getParent() {
+        return parent;
+    }
+
+    public void setParent(Vertex parent) {
+        this.parent = parent;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    // Method for displaying the information of the Edge class attributes.
+    public abstract void displyInfo();
+
+    @Override
+    public int compareTo(Edge other) {
+        return Integer.compare(weight, other.weight);
     }
 }

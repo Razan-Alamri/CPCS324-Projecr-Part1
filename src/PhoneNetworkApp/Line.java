@@ -49,5 +49,4 @@ public class Line extends Edge {
    public void displyInfo() {
       System.out.println(getSource().displyInfo() + " - " + getTarget().displyInfo() + " : line length: " + lLength);
    }
-
 }

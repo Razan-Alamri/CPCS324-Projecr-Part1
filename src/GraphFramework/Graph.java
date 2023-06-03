@@ -16,39 +16,39 @@ public abstract class Graph {
 
     // Data filed
 
-    // Number of vertices
+    // count Number of vertices
     int verticesNo;
     // Number of edges
     int edgeNo;
     // Check if graph is directed or not
     boolean isDigraph;
-    // Map to can store and found vertex by label (from association relationship)
-    public Map<String, Vertex> vertices;
-
-    // ----------------------------------------------------------check
-    // Map to can found Edge by source
-    // Map<String, Edge> edgeMap;
+    // Array to can store and found vertex by Position(ID) (from association
+    // relationship)
+    public Vertex[] vertices;
+    // toltal Number of vertices;
+    int AllEdgesNo;
 
     // Contructors
     public Graph() {
-        this.verticesNo = 0;
-        this.edgeNo = 0;
-        this.isDigraph = false;
-        this.vertices = new HashMap<>();
+
     }
 
-    public Graph(int verticesNo, int edgeNo, boolean isDigraph) {
-        this.verticesNo = verticesNo;
-        this.edgeNo = edgeNo;
+    public Graph(int verticesNo, int EdgeNo, boolean isDigraph) {
+        this.AllEdgesNo = EdgeNo;
         this.isDigraph = isDigraph;
-        this.vertices = new HashMap<>(verticesNo);
+        this.verticesNo = verticesNo;
+        vertices = new Vertex[verticesNo];
     }
 
     // Abstract method to create object of Vertex
-    public abstract Vertex creatVertex(String lable, int ID);
+    public abstract Vertex creatVertex(int ID);
 
-    // Abstract method to create object of Edge
+    // Abstract methods to create object of Edge
     public abstract Edge creatEdge(Vertex v, Vertex u, int w);
+
+    public abstract Edge creatEdge(int w);
+
+    public abstract Edge creatEdge();
 
     /*
      * Methos responsible for creating a graph object with the specified parameters
@@ -56,130 +56,154 @@ public abstract class Graph {
      * creating edges that connects the created vertices randomly and
      * assigning them random weights.
      */
-    public Graph makeGraph(int n, int m) {
-        // Create n vertices with random labels
-        Random rand = new Random();
-        for (int i = 0; i < n; i++) {
-            int labelNum = rand.nextInt(n);
-            String label = "O" + (i + 1);
+    public void makeGraph() {
+        // Create n vertices with random labels && edgeNo < AllEdgesNo
+        Random random = new Random();
 
-            // To avoid Vertex duplicate
-            while (vertices.containsKey(label)) {
-                labelNum = rand.nextInt(n);
-                label = "O" + labelNum;
-                // v = creatVertex(label, i);
-            }
+        for (int i = 0; i < verticesNo - 1 && edgeNo < AllEdgesNo; i++) {
+            int r = random.nextInt(50) + 1;
+
             // initializ vertex
-            Vertex v = creatVertex(label, i);
-            // Add vertex to map
-            vertices.put(label, v);
+            addEdge(i, i + 1, r);
         }
 
-        // Create m edges randomly between vertices
+        // calculate the remainig edges to generate it randomly
+        int remaning = AllEdgesNo - (verticesNo - 1);
+
+        // Save edges to avoid duplicate edge
         HashSet<String> edgeSet = new HashSet<>();
-        for (int i = 0; i < m; i++) {
+        // make random graph with remaining edges
+        for (int i = 0; i < remaning && edgeNo < AllEdgesNo; i++) {
             // Choose two random vertices
-            List<String> labels = new ArrayList<>(vertices.keySet());
-            String label1 = labels.get(rand.nextInt(labels.size()));
-            String label2 = labels.get(rand.nextInt(labels.size()));
+            int ver_Vertex = random.nextInt(verticesNo);
+            int target_Vertex = random.nextInt(verticesNo);
             /*
-             * label1.equals(label2) -> to check source and diestination are not the same
-             * edgeSet.contains(label1+":"+label2) -> to check there is no edge between them
+             * ver_Vertex.equals(target_Vertex) -> to check ver and diestination are
+             * not the same
+             * edgeSet.contains(ver_Vertex+":"+target_Vertex) -> to check there is no
+             * edge between them
              */
-            while (label1.equals(label2) || edgeSet.contains(label1 + ":" + label2)) {
-                label1 = labels.get(rand.nextInt(labels.size()));
-                label2 = labels.get(rand.nextInt(labels.size()));
+            if (ver_Vertex == target_Vertex || edgeSet.contains(ver_Vertex + ":" + target_Vertex)) {
+                i--;
+                continue;
             }
-
             // Create edge with random weight
-            Vertex v = vertices.get(label1);
-            Vertex u = vertices.get(label2);
-            // Random weight between 1 and 50
-            int weight = rand.nextInt(50) + 1;
+            int r = random.nextInt(50) + 1;
             // Call method addEdge to add edges
-            addEdge(v, u, weight);
+            addEdge(ver_Vertex, target_Vertex, r);
             // Add edge to set to prevent duplicates
-            edgeSet.add(label1 + ":" + label2);
+            edgeSet.add(ver_Vertex + ":" + target_Vertex);
+            // To add label of vertex
+            add_Label(ver_Vertex);
+            add_Label(target_Vertex);
         }
-
-        // Return the current Graph object
-        return this;
     }
 
     /*
      * Method to reads the edges and vertices from the text file
      * whose name is inputFile
      */
-    public Graph readGraphFromFile(File fileName) throws FileNotFoundException {
+    public void readGraphFromFile(File fileName) throws FileNotFoundException {
+
         Scanner inpScanner = new Scanner(fileName);
-
         // Read header information
-        String graphname = inpScanner.next();
-        int is_Digraph = inpScanner.nextInt();
-        if (is_Digraph == 1) {
-            this.isDigraph = true;
-        } else if (is_Digraph == 0) {
-            this.isDigraph = false;
+        inpScanner.next();
+        // Read Graph type if 0 is undirected if 1 is directed
+        int digraph = inpScanner.nextInt();
+        if (digraph == 1) {
+            isDigraph = true;
         }
-        this.verticesNo = inpScanner.nextInt();
-        this.edgeNo = inpScanner.nextInt();
+        // Read the number of vertices & edges
+        verticesNo = inpScanner.nextInt();
+        edgeNo = inpScanner.nextInt();
 
-        int id = 0;
         // Create vertices
+        vertices = new Vertex[verticesNo];
         while (inpScanner.hasNext()) {
-            String sLabel = inpScanner.next();
-            String dLabel = inpScanner.next();
-            int weight = inpScanner.nextInt();
-
-            // Get or create source vertex
-            Vertex s = vertices.get(sLabel);
-            if (s == null) {
-                s = creatVertex(sLabel, id);
-                vertices.put(sLabel, s);
-            }
-
-            // Get or create destination vertex
-            Vertex d = vertices.get(dLabel);
-            if (d == null) {
-                d = creatVertex(dLabel, id);
-                vertices.put(dLabel, d);
-            }
-            id++;
-            // Add edge between source and destination vertices
-            addEdge(s, d, weight);
+            // Read ver vertex
+            char s = inpScanner.next().charAt(0);
+            // Read tar vertex
+            char t = inpScanner.next().charAt(0);
+            // Read weight
+            int wieght = inpScanner.nextInt();
+            // Add edge between ver and destination vertices
+            addEdge(s - 65, t - 65, wieght);
+            // Add label if ver vertex
+            add_Label(s);
+            // Add label if ver vertex
+            add_Label(t);
         }
-
+        // Close scanner object
         inpScanner.close();
-        return this;
     }
 
     /*
-     * Method that creates an edge object and passes source v vertex, target u
+     * Method that creates an edge object and passes ver v vertex, tar u
      * vertex
-     * and weight as parameters, assigns the target vertex to the adjacent list
-     * of the source vertex
+     * and weight as parameters, assigns the tar vertex to the adjacent list
+     * of the ver vertex
      */
-    public void addEdge(Vertex v, Vertex u, int w) {
-        // Create edge
-        Edge edge = creatEdge(v, u, w);
-
-        // Add edge to the source adjacent list
-        v.adjList.addFirst(edge);
-
-        // Check if it is an undirected graph
-        if (!isDigraph) {
-            // Create reverse edge and add it to the target adjacent list
-            Edge revEdge = creatEdge(u, v, w);
-            u.adjList.addFirst(revEdge);
-            ;
+    public Edge addEdge(int v, int u, int w) {
+        // Get or create ver vertex
+        if (vertices[v] == null) {
+            Vertex ver = creatVertex(v);
+            vertices[v] = ver;
         }
+        // Get or create destination vertex
+        if (vertices[u] == null) {
+            Vertex tar = creatVertex(u);
+            vertices[u] = tar;
+        }
+        // Create edge
+        Edge edge1 = creatEdge(vertices[v], vertices[u], w);
+        // Add edge to the ver adjacent list
+        vertices[v].adjList.add(edge1);
         /*
          * Increment the edge count by 1 If it is a undirected graph
          * and by 2 if directed graph
          */
-        edgeNo += isDigraph ? 1 : 2;
+
+        if (!isDigraph) {
+            // Create reverse edge and add it to the target adjacent list
+            Edge edge2 = creatEdge(vertices[u], vertices[v], w);
+            vertices[u].adjList.add(edge2);
+            add_Label(u);
+            edgeNo++;
+        }
+        edgeNo++;
+        return edge1;
     }
 
+    // TO print graph
+    public void PrintGraph() {
+        System.out.println("Adjacency List:");
+        for (int i = 0; i < verticesNo; i++) {
+            int length = 0;
+            System.out.print(vertices[i].displyInfo() + " -> ");
+            for (Edge e : vertices[i].adjList) {
+                System.out.print(vertices[e.target.ID].displyInfo());
+                length += e.getWeight();
+            }
+            System.out.print(" --- Cost : " + length);
+            System.out.println();
+        }
+    }
+
+    // add label from file
+    public void add_Label(char lable) {
+        vertices[lable - 65].label = lable;
+    }
+
+    // add label with uniqe number add_Label_Make
+    public void add_Label(int id) {
+        if (vertices[id].label == 0) {
+            int x = id;
+            char a = (char) (x + '0');
+            vertices[id].label = a;
+        }
+    }
+
+    // Setteers and Getters
     public int getVerticesNo() {
         return verticesNo;
     }
@@ -204,12 +228,20 @@ public abstract class Graph {
         this.isDigraph = isDigraph;
     }
 
-    public Map<String, Vertex> getVertices() {
+    public Vertex[] getVertices() {
         return vertices;
     }
 
-    public void setVertices(Map<String, Vertex> vertices) {
+    public void setVertices(Vertex[] vertices) {
         this.vertices = vertices;
+    }
+
+    public int getAllEdgesNo() {
+        return AllEdgesNo;
+    }
+
+    public void setAllEdgesNo(int allEdgesNo) {
+        AllEdgesNo = allEdgesNo;
     }
 
 }

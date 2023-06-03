@@ -53,7 +53,6 @@ public class PhoneNWDesignApp {
                 PhLNetwork = new BluePrintsGraph();
                 File InputFile = new File("InputGraph.txt");
                 PhLNetwork.readGraphFromFile(InputFile);
-                PhLNetwork.PrintGraph();
                 isFile = true;
                 break;
             case 2:
@@ -91,9 +90,8 @@ public class PhoneNWDesignApp {
                 switch (test_Case) {
                     case 1:
                         // Create a new graph object
-                        PhLNetwork = new BluePrintsGraph(10, 20, isDigraph);
+                        PhLNetwork = new BluePrintsGraph(1000, 10000, isDigraph);
                         PhLNetwork.makeGraph();
-                        PhLNetwork.PrintGraph();
                         break;
                     case 2:
                         // Create a new graph object
@@ -134,32 +132,34 @@ public class PhoneNWDesignApp {
         System.out.println("----------------------------------------------------------------------------------");
         System.out.println();
 
-        // - Compute the minimum spanning tree using Kruskal algorithm and print the
-        // result
+        // Compute the minimum spanning tree using Kruskal algorithm
+        KruskalAlg kruskalAlg = new KruskalAlg(PhLNetwork);
+        // Start time
         start_Time = System.currentTimeMillis();
-        // ***********************************************************************************************************
-        // */
-        // KruskalAlg kruskalAlg = new KruskalAlg();
-        // kruskalAlg.displayResultingMST();
-        // System.out.println("Minimum Spanning Tree cost: " + kruskalAlg.getMSTCost());
+        // Call displayResultingMST method to display MST
+        kruskalAlg.displayResultingMST(isFile);
+        // End time
         end_Time = System.currentTimeMillis();
 
-        System.out.println("Kruskal's Algorithm's run time is  " + (end_Time - start_Time) + " ms.\n");
+        // Prtint run time
+        System.out.println("----------------------------------------------------------------------------------");
+        System.out.println("\nKruskal's Algorithm's run time is  " + (end_Time - start_Time) + " ms.\n");
+        System.out.println("----------------------------------------------------------------------------------");
 
-        // Compute the minimum spanning tree using Min-heap based Prim algorithm and
-        // print the result
-        start_Time = System.currentTimeMillis();
-        // ***********************************************************************************************************
-        // */
-
+        // Compute the minimum spanning tree using Min-heap based Prim algorithm
         MHPrimAlg primAlg = new MHPrimAlg(PhLNetwork);
-        // Compute the minimum spanning tree using Prim's algorithm
-        // primAlg.PrimMH();
-        primAlg.displayResultingMST();
+        // Start time
+        start_Time = System.currentTimeMillis();
+        // Call displayResultingMST method to display MST
+        // primAlg.displayResultingMST();
 
+        // End time
         end_Time = System.currentTimeMillis();
 
-        System.out.println("Min-heap based Prim Algorithm's run time is  " + (end_Time - start_Time) + " ms.\n");
+        // Prtint run time
+        System.out.println("----------------------------------------------------------------------------------");
+        System.out.println("\nMin-heap based Prim Algorithm's run time is  " + (end_Time - start_Time) + " ms.\n");
+        System.out.println("----------------------------------------------------------------------------------");
 
         // Print Hedar massege
         System.out.println("----------------------------------------------------------------------------------");

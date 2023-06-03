@@ -10,27 +10,25 @@ package GraphFramework;
 
 import java.util.*;
 
-/*MSTAlgorithm: is a superclass representing the general characteristics of an algorithm for computing
-the minimum spanning tree. It has three subclasses: KruskalAlg and MHPrimAlg. It contains the
-following attributes and functions:
-Attributes displayed via association relationship in the diagram: MSTResultList attribute is a list of
-objects of the type Edge. It stores the parent of the vertex and the weight needed by the MST algorithm.
-displayResultingMST(): it is an abstract function that should be implemented by the subclasses’
-polymorphic functions. */
+/* MSTAlgorithm: is a superclass representing the general characteristics of an algorithm for computing
+   the minimum spanning tree. It has three subclasses: KruskalAlg and MHPrimAlg. 
+ */
 public abstract class MSTAlgorithm {
 
    // Data filed
 
    // Create Graph object (from association relationship)
    protected Graph graph;
-   //
-   protected List<Edge> MSTResultList;
+   // To stores the parent of the vertex and the weight needed by the MST
+   // algorithm.
+   Edge MSTResultList[];
 
    // Contructors
    public MSTAlgorithm(Graph graph) {
       this.graph = graph;
    }
 
-   public abstract void displayResultingMST();
+   // It is an abstract function that should be implemented by the subclasses
+   public abstract void displayResultingMST(boolean isFile);
 
 }
