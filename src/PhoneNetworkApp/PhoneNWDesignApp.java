@@ -32,72 +32,104 @@ public class PhoneNWDesignApp {
         System.out.println("\n----------------------------------------------------------------------------------");
 
         // To disply menu of test cases can do
-        System.out.println("\n<<  Test Cases  >>\n");
-        System.out.println(" 1:  Read Phone Network Design From File");
-        System.out.println(" 2:  n = 1000 and  m = 10000");
-        System.out.println(" 3:  n = 1000 and  m = 15000");
-        System.out.println(" 4:  n = 1000 and  m = 25000");
-        System.out.println(" 5:  n = 5000 and  m = 15000");
-        System.out.println(" 6:  n = 5000 and  m = 25000");
-        System.out.println(" 7:  n = 10000 and m = 15000");
-        System.out.println(" 8:  n = 10000 and m = 25000");
-        System.out.println();
-        System.out.println("< NOTE: n is the number of offices and m is the number of Lines >");
-        System.out.print("\n> From these cases, please enter your choice: ");
-        // To save number of test Case choice
-        int test_Case = input.nextInt();
+        System.out.println("\n<<  Test Type  >>\n");
+        System.out.println(" 1:  Read The Graph From File");
+        System.out.println(" 2:  Create a Random Graph");
+        System.out.print("\n> From these choices, please enter your choice: ");
+
+        // To save number of test Type choice
+        int test_Type = input.nextInt();
 
         // Create a new graph object
         Graph PhLNetwork = new BluePrintsGraph();
 
+        // To only print result if case is read from file
+        boolean isFile = false;
+
         // To get test case
-        switch (test_Case) {
+        switch (test_Type) {
             case 1:
                 // Create a new graph object
                 PhLNetwork = new BluePrintsGraph();
                 File InputFile = new File("InputGraph.txt");
                 PhLNetwork.readGraphFromFile(InputFile);
+                PhLNetwork.PrintGraph();
+                isFile = true;
                 break;
             case 2:
-                // Create a new graph object
-                PhLNetwork = new BluePrintsGraph();
-                PhLNetwork.makeGraph(1000, 10000);
-                break;
-            case 3:
-                // Create a new graph object
-                PhLNetwork = new BluePrintsGraph();
-                PhLNetwork.makeGraph(1000, 15000);
-                break;
-            case 4:
-                // Create a new graph object
-                PhLNetwork = new BluePrintsGraph();
-                PhLNetwork.makeGraph(1000, 25000);
-                break;
-            case 5:
-                // Create a new graph object
-                PhLNetwork = new BluePrintsGraph();
-                PhLNetwork.makeGraph(5000, 15000);
-                break;
-            case 6:
-                // Create a new graph object
-                PhLNetwork = new BluePrintsGraph();
-                PhLNetwork.makeGraph(5000, 25000);
-                break;
-            case 7:
-                // Create a new graph object
-                PhLNetwork = new BluePrintsGraph();
-                PhLNetwork.makeGraph(10000, 15000);
-                break;
-            case 8:
-                // Create a new graph object
-                PhLNetwork = new BluePrintsGraph();
-                PhLNetwork.makeGraph(10000, 25000);
-                break;
-            default:
-                System.out.println("<   Invalid input!  >");
-                break;
-        }
+                isFile = false;
+                // To disply menu of test cases can do
+                System.out.println("\n<<  Test Cases  >>\n");
+                System.out.println(" 1:  n = 1000 and  m = 10000");
+                System.out.println(" 2:  n = 1000 and  m = 15000");
+                System.out.println(" 3:  n = 1000 and  m = 25000");
+                System.out.println(" 4:  n = 5000 and  m = 15000");
+                System.out.println(" 5:  n = 5000 and  m = 25000");
+                System.out.println(" 6:  n = 10000 and m = 15000");
+                System.out.println(" 7:  n = 10000 and m = 25000");
+                System.out.println();
+                System.out.println("< NOTE: n is the number of offices and m is the number of Lines >");
+                System.out.print("\n> From these cases, please enter your choice: ");
+                // To save number of test Case choice
+                int test_Case = input.nextInt();
 
+                // Ask user about graph type (directed / undirected)
+                Boolean isDigraph = false;
+                System.out.print("Do you want the graph directed (Y/N) ? ");
+                String graphType = input.next();
+
+                // If Invalid input
+                if (!graphType.equalsIgnoreCase("Y") && !graphType.equalsIgnoreCase("N")) {
+                    System.out.println("\n<   Invalid input!  >");
+                    System.out.print("> Please enter your choice again : ");
+                    graphType = input.next();
+                }
+                // If directed graph
+                if (graphType.equalsIgnoreCase("Y")) {
+                    isDigraph = true;
+                }
+                switch (test_Case) {
+                    case 1:
+                        // Create a new graph object
+                        PhLNetwork = new BluePrintsGraph(10, 20, isDigraph);
+                        PhLNetwork.makeGraph();
+                        PhLNetwork.PrintGraph();
+                        break;
+                    case 2:
+                        // Create a new graph object
+                        PhLNetwork = new BluePrintsGraph(1000, 15000, isDigraph);
+                        PhLNetwork.makeGraph();
+                        break;
+                    case 3:
+                        // Create a new graph object
+                        PhLNetwork = new BluePrintsGraph(1000, 25000, isDigraph);
+                        PhLNetwork.makeGraph();
+                        break;
+                    case 4:
+                        // Create a new graph object
+                        PhLNetwork = new BluePrintsGraph(5000, 15000, isDigraph);
+                        PhLNetwork.makeGraph();
+                        break;
+                    case 5:
+                        // Create a new graph object
+                        PhLNetwork = new BluePrintsGraph(5000, 25000, isDigraph);
+                        PhLNetwork.makeGraph();
+                        break;
+                    case 6:
+                        // Create a new graph object
+                        PhLNetwork = new BluePrintsGraph(10000, 15000, isDigraph);
+                        PhLNetwork.makeGraph();
+                        break;
+                    case 7:
+                        // Create a new graph object
+                        PhLNetwork = new BluePrintsGraph(10000, 25000, isDigraph);
+                        PhLNetwork.makeGraph();
+                        break;
+                    default:
+                        System.out.println("<   Invalid input!  >");
+                        break;
+                }
+        }
         // Apply two algoritms and compute the run time for each algorithm
         System.out.println("----------------------------------------------------------------------------------");
         System.out.println();

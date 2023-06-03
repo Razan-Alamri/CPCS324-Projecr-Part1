@@ -31,8 +31,8 @@ public class BluePrintsGraph extends Graph {
     * to create object of Vertex "Office"
     */
    @Override
-   public Vertex creatVertex(String lable, int ID) {
-      return new Office(lable, ID);
+   public Vertex creatVertex(int ID) {
+      return new Office(ID);
 
    }
 
@@ -43,7 +43,16 @@ public class BluePrintsGraph extends Graph {
    @Override
    public Edge creatEdge(Vertex v, Vertex u, int w) {
       return new Line(v, u, w);
+   }
 
+   @Override
+   public Edge creatEdge(int w) {
+      return new Line(w);
+   }
+
+   @Override
+   public Edge creatEdge() {
+      return new Line();
    }
 
 }
