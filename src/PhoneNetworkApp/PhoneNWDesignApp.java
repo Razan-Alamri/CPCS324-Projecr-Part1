@@ -151,7 +151,7 @@ public class PhoneNWDesignApp {
         // Start time
         start_Time = System.currentTimeMillis();
         // Call displayResultingMST method to display MST
-        // primAlg.displayResultingMST();
+        primAlg.displayResultingMST(isFile);
 
         // End time
         end_Time = System.currentTimeMillis();
