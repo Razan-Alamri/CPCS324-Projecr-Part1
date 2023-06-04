@@ -28,8 +28,9 @@ public class Office extends Vertex {
    }
 
    // Method to set label
-   public void setLabel(char label) {
+   public String setlabel(char label) {
       stringLabel = "O" + getID();
+      return stringLabel;
    }
 
    /*
