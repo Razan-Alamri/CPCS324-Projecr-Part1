@@ -24,11 +24,6 @@ public class Line extends Edge {
    public Line(Vertex source, Vertex target, int weight) {
       // Call a super class "Edge"
       super(source, target, weight);
-      /*
-       * The lLength attribute represents the line length and it is 5 times the weight
-       * of the corresponding edge
-       */
-      lLength = weight * 5;
    }
 
    public Line(int w) {
@@ -42,11 +37,21 @@ public class Line extends Edge {
    }
 
    /*
+    * The lLength attribute represents the line length and it is 5 times the weight
+    * of the corresponding edge
+    */
+   public int labLength(int weight) {
+      lLength = weight * 5;
+      return lLength;
+   }
+
+   /*
     * Override method that responsible for displaying
     * the information of the class attributes
     */
    @Override
    public void displyInfo() {
-      System.out.println(getSource().displyInfo() + " - " + getTarget().displyInfo() + " : line length: " + lLength);
+      System.out.println(
+            getParent().displyInfo() + " - " + getTarget().displyInfo() + " : line length: " + labLength(getWeight()));
    }
 }

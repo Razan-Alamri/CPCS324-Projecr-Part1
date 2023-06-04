@@ -152,7 +152,6 @@ public class PhoneNWDesignApp {
         start_Time = System.currentTimeMillis();
         // Call displayResultingMST method to display MST
         primAlg.displayResultingMST(isFile);
-
         // End time
         end_Time = System.currentTimeMillis();
 
@@ -162,7 +161,7 @@ public class PhoneNWDesignApp {
         System.out.println("----------------------------------------------------------------------------------");
 
         // Print Hedar massege
-        System.out.println("----------------------------------------------------------------------------------");
+        System.out.println("\n\n----------------------------------------------------------------------------------");
         System.out.println("-------         Thank You For Using Phone Network Design Program           -------");
         System.out.println("----------------------------------------------------------------------------------");
 
