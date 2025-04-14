@@ -23,7 +23,8 @@ This project implements **Kruskal’s Algorithm** and **Min-Heap based Prim’s 
 
 
 ## 📁 Files Included
-
+- `PhoneNetwork_MST_Assignment.pdf` – The original assignment brief including all requirements, UML class diagrams, and design instructions.
+- `Empirical_Analysis__Report.pdf` – Detailed report analyzing the empirical performance of the algorithm vs theoretical expectations.
 - `PhNWDesignApp.java` – Main application class.
 - `Graph.java` – Base graph structure.
 - `Office.java` – Subclass of Vertex.
@@ -32,9 +33,7 @@ This project implements **Kruskal’s Algorithm** and **Min-Heap based Prim’s 
 - `MHPrimAlg.java` – Implementation of Min-Heap Prim’s algorithm.
 - `MSTAlgorithm.java` – Abstract base class for MST algorithms.
 - `graph_input.txt` – Sample graph file (formatted as per Appendix II).
-- `report.docx` – Project report including results, discussion, and conclusion.
 - `plot_results.png` – Runtime comparison graph.
-- `README.md` – You are here! ✔
 
 
 ## 🖥️ Tools & Technologies
